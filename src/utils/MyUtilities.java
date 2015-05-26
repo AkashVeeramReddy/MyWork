@@ -1,0 +1,125 @@
+package utils;
+
+public class MyUtilities {
+	
+	public static boolean nullSafeEquals(Object o1, Object o2) {
+		return o1 == null ? o2 == null : o1.equals(o2);
+	}
+	
+	public static <K> void swap(K [] array,int idx1,int idx2) {
+		K temp = array[idx1];
+		array[idx1] = array[idx2];
+		array[idx2] = temp;
+	}
+	
+	public static <K> void swap(K data1,K data2) {
+		K temp = data1;
+		data1 = data2;
+		data2 = temp;
+	}
+	
+	public static void removeCommaAtEndOfBuilder(StringBuilder builder) {
+		if(builder != null) {
+			int length = builder.length();
+			if(length >0 && builder.charAt(length - 1) == ',') {
+				builder.setLength(length - 1);
+			}
+		}
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(int [][] array) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[0].length; j++) {
+				int no = 0;
+				while(no==0) {
+					no = (int) (Math.random() * 10);
+				}
+				array[i][j] = no;
+			}
+		}
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(Integer [][] array) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[0].length; j++) {
+				int no = 0;
+				while(no==0) {
+					no = (int) (Math.random() * 10);
+				}
+				array[i][j] = no;
+			}
+				
+		}
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(Integer [] array) {
+		for (int i = 0; i < array.length; i++) {
+			int no = 0;
+			while(no==0) {
+				no = (int) (Math.random() * 10);
+			}
+			array[i] = no;
+		}
+	}
+	
+	/**
+	 * [0,0] appears on top
+	 * @param <K>
+	 * @param array
+	 * @param cellWidth
+	 */
+	public static <K> void printDoubleDimensionalArray(K[][] array,int cellWidth) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[0].length; j++) {
+				String string = String.valueOf(array[i][j]);
+				System.out.print(string);
+				printTrailingSpaces(cellWidth, string);
+			}
+			System.out.println();
+		}
+	}
+	
+	/**
+	 * [0,0] appears on bottom
+	 */
+	public static <K> void printDoubleDimensionalArrayNeatly(K[][] array,int cellWidth) {
+		for (int i = array.length-1; i >= 0; i--) {
+			for (int j = 0; j < array[0].length; j++) {
+				String string = String.valueOf(array[i][j]);
+				System.out.print(string);
+				printTrailingSpaces(cellWidth, string);
+			}
+			System.out.println();
+		}
+	}
+	
+	public static <K> void printSingleDimensionArray(K[] array) {
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(String.valueOf(array[i]));
+			System.out.print("\t");
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * 
+	 * @param <K>
+	 * @param array
+	 * @param cellWidth
+	 */
+	public static <K> void printSingleDimensionArrayNeatly(K[] array,int cellWidth) {
+		for (int i = 0; i < array.length; i++) {
+			String string = String.valueOf(array[i]);
+			System.out.print(string);
+			printTrailingSpaces(cellWidth, string);
+		}
+		System.out.println();
+	}
+
+	public static void printTrailingSpaces(int cellWidth, String printedString) {
+		for(int k = cellWidth;k >= printedString.length();k--) {
+			System.out.print(" ");
+		}
+	}
+	
+}
