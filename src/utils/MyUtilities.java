@@ -18,6 +18,48 @@ public class MyUtilities {
 		data2 = temp;
 	}
 	
+	public static <K extends Comparable<? super K>> K getMaxElement(K... elements) {
+		return getMaxElementinArray(elements);
+	}
+	
+	public static <K extends Comparable<? super K>> K getMaxElementinArray(K[] elements) {
+		K maxEle = null;
+		int itr = 0;
+		for (K eleItr : elements) {
+			if(itr == 0) {
+				maxEle = eleItr;
+			} else {
+				int compareTo = maxEle.compareTo(eleItr);
+				if(compareTo < 0) {
+					maxEle = eleItr;
+				}
+			}
+			itr++;
+		}
+		return maxEle;
+	}
+	
+	public static <K extends Comparable<? super K>> K getMinElement(K... elements) {
+		return getMinElementInArray(elements);
+	}
+	
+	public static <K extends Comparable<? super K>> K getMinElementInArray(K[] elements) {
+		K minEle = null;
+		int itr = 0;
+		for (K eleItr : elements) {
+			if(itr == 0) {
+				minEle = eleItr;
+			} else {
+				int compareTo = minEle.compareTo(eleItr);
+				if(compareTo > 0) {
+					minEle = eleItr;
+				}
+			}
+			itr++;
+		}
+		return minEle;
+	}
+	
 	public static void removeCommaAtEndOfBuilder(StringBuilder builder) {
 		if(builder != null) {
 			int length = builder.length();
