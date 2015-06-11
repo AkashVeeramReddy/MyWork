@@ -92,7 +92,7 @@ public class SingleLinkedList<K> {
 		prevItrNode.next = dataNode;
 	}
 	
-	public boolean isListCircular(){
+	public boolean isLoopOccursInList(){
 		boolean isListCircular = false;
 		Node<K> itrNode = header;
 		Node<K> doubleItrNode = header;
@@ -152,7 +152,7 @@ public class SingleLinkedList<K> {
 		return node.data;
 	}
 	
-	protected class Node<K> {
+	public static class Node<K> {
 		K data;
 		Node<K> next;
 		
