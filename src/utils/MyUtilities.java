@@ -6,6 +6,14 @@ public class MyUtilities {
 		return o1 == null ? o2 == null : o1.equals(o2);
 	}
 	
+	public static boolean isEven(int no) {
+		return no % 2 == 0;
+	}
+	
+	public static boolean isOdd(int no) {
+		return no % 2 != 0;
+	}
+	
 	public static <K> void swap(K [] array,int idx1,int idx2) {
 		K temp = array[idx1];
 		array[idx1] = array[idx2];
