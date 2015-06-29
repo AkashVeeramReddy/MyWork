@@ -1,10 +1,9 @@
 package tree;
 
-import queue.IQueue;
-import stack.IStack;
 import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
+import stack.IStack;
 
 public class IterativeTraversalBST<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	

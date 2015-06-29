@@ -111,6 +111,7 @@ public class CollectionUtils {
 		default:
 			break;
 		}
+		System.out.println("Inserting "+list);
 		addToCollection(collection, list.toArray(new Integer[]{}));
 	}
 	

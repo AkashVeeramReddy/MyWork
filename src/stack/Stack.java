@@ -9,6 +9,9 @@ public class Stack<K> implements IStack<K>{
 	public Stack(){
 	}
 	
+	public boolean add(K ele) {
+		return push(ele);
+	}
 	public boolean push(K ele) {
 		StackNode<K> newData = new StackNode<K>();
 		newData.data = ele;

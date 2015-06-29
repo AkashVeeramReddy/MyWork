@@ -3,20 +3,16 @@ package tree;
 import list.IList;
 import list.linkedlist.MyLinkedList;
 
-public class CheckBinarySearchTreeFunctionality {
+public class TestBinarySearchTree {
 	public static void main(String[] args) {
-		Integer a[] = {1,2,3,4,5,6,7};
-		TreeNode<Integer> treeFrom = ExtendedBinarySearchTree.getTreeFrom(a);
-		System.out.println();
-		ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
+		BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.add(50);
 		tree.add(25);
 		tree.add(75);
 		tree.add(10);
 		tree.add(0);
 		tree.add(100);
-		boolean balancedTree = tree.isBalancedTree();
-		System.out.println();
+		tree.showImage();
 		/*ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
 		tree.add(50);
 		tree.add(25);

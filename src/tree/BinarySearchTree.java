@@ -1,11 +1,20 @@
 package tree;
 import static tree.BinarySearchTreeType.*;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 import queue.IQueue;
 import list.linkedlist.MyLinkedList;
+import utils.FileUtils;
+import utils.MyConstants;
 import utils.MyUtilities;
+import utils.PatternUtils;
 public class BinarySearchTree<K extends Comparable<? super K>> {
 	
 	protected TreeNode<K> root;
@@ -62,8 +71,11 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		switch (treeType) {
 		case INORDER_ASCENDING:
 			return true;
+		case INORDER_DESCENDING:
+			return false;
+		default:
+			return false;
 		}
-		return false;
 	}
 	
 	public boolean contains(K element){
@@ -115,6 +127,113 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		builder.append(",");
 		builder.append(toString(root.right));
 		return builder.toString();
+	}
+	
+	public void showImage() throws RuntimeException {
+		String dotContents = getDotFileContents();
+		
+		File homeFolder = new File(MyConstants.USER_HOME);
+		File dotFile = new File(homeFolder,"tree.dot");
+		File imageFile = null;
+		try {
+			if(!dotFile.exists()) {
+				dotFile.createNewFile();
+			}
+			FileUtils.writeToFile(dotFile, dotContents);
+			imageFile = new File(homeFolder, "tree.png");
+			/*if(!imageFile.exists()) {
+				imageFile.createNewFile();
+			}*/
+			Runtime.getRuntime().exec("dot -Tpng "+dotFile.getAbsolutePath()+
+					" -o " + imageFile.getAbsolutePath());
+			Desktop.getDesktop().open(imageFile);
+		} catch (Exception e) {
+			new RuntimeException(e);
+		} finally {
+			//imageFile.delete();
+			//dotFile.delete();
+		}
+	}
+
+	protected String getDotFileContents() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("digraph DotContents {");
+		builder.append(MyConstants.NEW_LINE);
+		
+		builder.append(getDotFileContents(root));
+		builder.append(MyConstants.NEW_LINE);
+		builder.append("}");
+		
+		return builder.toString();
+		
+	}
+	
+	protected StringBuilder getDotFileContents(TreeNode<K> ptrRoot) {
+		
+		StringBuilder builder = new StringBuilder();
+		if(ptrRoot == null)
+			return builder;
+		String string = ptrRoot.data.toString();
+		Matcher m = PatternUtils.WHITESPACE_PATTERN.matcher(string);
+		String nodeName = m.replaceAll("");
+		builder.append(nodeName);
+		builder.append(MyConstants.NEW_LINE);
+		
+		if(ptrRoot.left == null && ptrRoot.right == null) {
+			return builder;
+		}
+		
+		if(ptrRoot.left != null) {
+			builder.append(getDotFileContents(ptrRoot.left));
+			builder.append(MyConstants.NEW_LINE);
+			
+			String leftStr = ptrRoot.left.data.toString();
+			Matcher leftM = PatternUtils.WHITESPACE_PATTERN.matcher(leftStr);
+			String leftNodeName = leftM.replaceAll("");
+			
+			builder.append(nodeName);
+			builder.append(" " + "->" + " ");
+			builder.append(leftNodeName);
+			
+			builder.append(MyConstants.NEW_LINE);
+		} else {
+			String leftNull = "left" + nodeName;
+			builder.append(leftNull);
+			builder.append(" [label=\"null\"]");
+			builder.append(MyConstants.NEW_LINE);
+			
+			builder.append(nodeName);
+			builder.append(" " + "->" + " ");
+			builder.append(leftNull);
+			
+			builder.append(MyConstants.NEW_LINE);
+		}
+		if(ptrRoot.right != null) {
+			builder.append(getDotFileContents(ptrRoot.right));
+			builder.append(MyConstants.NEW_LINE);
+			
+			String rightStr = ptrRoot.right.data.toString();
+			Matcher rightM = PatternUtils.WHITESPACE_PATTERN.matcher(rightStr);
+			String rightNodeName = rightM.replaceAll("");
+			
+			builder.append(nodeName);
+			builder.append(" " + "->" + " ");
+			builder.append(rightNodeName);
+			
+			builder.append(MyConstants.NEW_LINE);
+		} else {
+			String rightNull = "right" + nodeName;
+			builder.append(rightNull);
+			builder.append(" [label=\"null\"]");
+			builder.append(MyConstants.NEW_LINE);
+			
+			builder.append(nodeName);
+			builder.append(" " + "->" + " ");
+			builder.append(rightNull);
+			
+			builder.append(MyConstants.NEW_LINE);
+		}
+		return builder;
 	}
 
 	public boolean remove(K element) {

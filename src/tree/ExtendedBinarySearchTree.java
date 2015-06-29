@@ -69,6 +69,70 @@ public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends B
 		}
 	}
 	
+	public void printAllPaths() {
+		printAllPaths(root,new StringBuilder());
+	}
+	
+	protected void printAllPaths(TreeNode<K> node,StringBuilder builder) {
+		if(node == null) {
+			System.out.println(builder);
+		} else {
+			builder.append(node.data);
+			//builder.append("->");
+			if(node.left == null && node.right == null) {
+				System.out.println(builder);
+			} else {
+				builder.append("->");
+				if(node.left != null && node.right != null) {
+					printAllPaths(node.left,new StringBuilder(builder));
+					printAllPaths(node.right,new StringBuilder(builder));
+				} else if(node.left == null) {
+					printAllPaths(node.right,builder);
+				} else {
+					//node.right == null
+					printAllPaths(node.left,builder);
+				}
+			}
+			
+		}
+	}
+	
+	/**
+	 * both are present in the tree
+	 * @param data1
+	 * @param data2
+	 * @return LCA of data1 and data2
+	 */
+	public K getLeastCommonAncestor(K data1,K data2) {
+		return getLeastCommonAncestor(root, data1, data2);
+	}
+	
+	protected K getLeastCommonAncestor(TreeNode<K> ptr, K data1,K data2) {
+		if(ptr == null) {
+			return null;
+		}
+		K data = ptr.data;
+		if(data == data1 || data.equals(data1)) {
+			return data1;
+		}
+		if(data == data2 || data.equals(data2)) {
+			return data2;
+		}
+		int dataCmpData1 = data.compareTo(data1);
+		int dataCmpData2 = data.compareTo(data2);
+		
+		if(dataCmpData1 > 0  && dataCmpData2 > 0) {
+			//search in left subtree
+			return getLeastCommonAncestor(ptr.left,data1,data2);
+		} else if(dataCmpData1 < 0  && dataCmpData2 < 0) {
+			//search in right subtree
+			return getLeastCommonAncestor(ptr.right,data1,data2);
+		} else {
+			return data;
+		}
+		
+	}
+
 	public boolean isBalancedTree() {
 		Info info = new Info();
 		return isBalancedTree(root,0,info);
@@ -105,11 +169,11 @@ public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends B
 		private int minDepthLevel;
 	}
 	
-	public static <I extends Comparable<I>> TreeNode<I> getTreeFrom(I[] sortedArrayinAscendingOrder) {
+	public static <I extends Comparable<? super I>> TreeNode<I> getTreeFrom(I[] sortedArrayinAscendingOrder) {
 		return getTreeFrom(sortedArrayinAscendingOrder,0,sortedArrayinAscendingOrder.length-1);
 	}
 	
-	public static <I extends Comparable<I>> TreeNode<I> getTreeFrom(I[] sortedArrayinAscendingOrder,int start,
+	public static <I extends Comparable<? super I>> TreeNode<I> getTreeFrom(I[] sortedArrayinAscendingOrder,int start,
 			int end) {
 		if(end < start)
 			return null;
