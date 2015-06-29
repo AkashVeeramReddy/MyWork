@@ -4,6 +4,16 @@ public class SingleLinkedList<K> {
 	
 	protected Node<K> header;
 	
+	public SingleLinkedList() {
+		
+	}
+	
+	public SingleLinkedList(K[] array) {
+		for (K data : array) {
+			add(data);
+		}
+	}
+	
 	public void add(K data) {
 		Node<K> createNode = createNode();
 		createNode.data = data;
@@ -189,7 +199,6 @@ public class SingleLinkedList<K> {
 		boolean isListCircular = false;
 		Node<K> itrNode = header;
 		Node<K> doubleItrNode = header;
-		Node<K> prevItrNode = null;
 		while(doubleItrNode != null && doubleItrNode.next != null) {
 //			prevItrNode = itrNode;
 			itrNode = itrNode.next;
@@ -227,7 +236,7 @@ public class SingleLinkedList<K> {
 		return true;
 	}
 	
-	public K getNodeFromEndofEndlist(int num) {
+	public K getDataFromEndofEndlist(int num) {
 		Node<K> itr = header;
 		for(int i = 1; i< num ; i++) {
 			if(itr == null) {

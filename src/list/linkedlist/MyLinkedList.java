@@ -1,15 +1,11 @@
 package list.linkedlist;
 
-import java.lang.reflect.Array;
 import java.util.Iterator;
-import java.util.ListIterator;
 
+import list.IList;
 import queue.IQueue;
-
 import stack.IStack;
 import utils.MyUtilities;
-import list.IList;
-import list.linkedlist.MyLinkedListNode;
 
 public class MyLinkedList<K> implements IStack<K>,IQueue<K>,IList<K>{
 	

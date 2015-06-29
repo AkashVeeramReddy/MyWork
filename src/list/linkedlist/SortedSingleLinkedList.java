@@ -1,10 +1,116 @@
 package list.linkedlist;
 
-import list.linkedlist.SingleLinkedList.Node;
 
 
 public class SortedSingleLinkedList<K extends Comparable<? super K>> extends SingleLinkedList<K> {
 	
+	public SortedSingleLinkedList() {
+		
+	}
+	public SortedSingleLinkedList(K[] data) {
+		for (K k : data) {
+			super.add(k);
+		}
+		sort();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void sort() {
+		Node<K> itr = header;
+		Node<K> prevItr = null;
+		while(itr != null) {
+			prevItr = itr;
+			itr = itr.next;
+		}
+		header = sort(header,prevItr)[0];
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected Node[] sort(Node<K> start,
+			Node<K> end) {
+		if(start != end) {
+			Node<K> middle = getNodeInMiddle(start, end);
+			Node<K> list2Start = middle.next;
+			Node[] list1Info = sort(start,middle);
+			Node[] list2Info = sort(list2Start,end);
+			
+			return merge(list1Info[0],list1Info[1],list2Info[0],list2Info[1]);
+		}
+		//1 node
+		return new Node[] {start,end};
+	}
+	
+	@SuppressWarnings("rawtypes")
+	protected Node[] merge(Node<K> start1,Node<K> end1,Node<K> start2,Node<K> end2) {
+		Node<K> leftItr = start1;
+		Node<K> rightItr = start2;
+		
+		Node<K> headSubList = null;
+		Node<K> sortedListItr = null;
+		
+		boolean isLeftOver = false;
+		boolean isRightOver = false;
+		while(!isLeftOver || !isRightOver) {
+			if(isLeftOver) {
+				//left Over
+				sortedListItr.next = rightItr;
+				sortedListItr = end2;
+				break;
+			} else if(isRightOver) {
+				//right over
+				sortedListItr.next = leftItr;
+				sortedListItr = end1;
+				break;
+			} else {
+				//both limits have not reached
+				int compareTo = leftItr.data.compareTo(rightItr.data);
+				if(compareTo > 0) {
+					//left Itr is greater
+					if(headSubList == null) {
+						headSubList = rightItr;
+						sortedListItr = rightItr;
+					} else {
+						sortedListItr.next = rightItr;
+						sortedListItr = rightItr;
+					}
+					if(rightItr == end2) {
+						isRightOver = true;
+					} else {
+						rightItr = rightItr.next;
+					}
+					
+				} else {
+					//right Itr is equal or greater
+					if(headSubList == null) {
+						headSubList = leftItr;
+						sortedListItr = leftItr;
+					} else {
+						sortedListItr.next = leftItr;
+						sortedListItr = leftItr;
+					}
+					if(leftItr == end1) {
+						isLeftOver = true;
+					} else {
+						leftItr = leftItr.next;
+					}
+				}
+			}
+			
+		}
+		sortedListItr.next = null;
+		return new Node [] {headSubList,sortedListItr};
+	}
+	protected Node<K> getNodeInMiddle(Node<K> start,Node<K> end) {
+		Node<K> singleItr = start;
+		Node<K> doubleItr = start;
+		
+		while(doubleItr!= end && doubleItr.next != end) {
+			singleItr = singleItr.next;
+			doubleItr = doubleItr.next.next;
+		}
+		
+		return singleItr;
+	}
 	@Override
 	public void add(K data) {
 		Node<K> createNode = createNode();

@@ -26,7 +26,36 @@ public class SingleLinkedListComparable<K extends Comparable<? super K>>
 		c) The list 60->50->40->30->20->10->NULL should not be changed.
 	 */
 	public void deleteNodesWithGreaterValueOnRight() {
-		
+		if(header == null || header.next == null)
+			return;
+		Node<K> itr = header;
+		Node<K> itrForNewList = null;
+		Node<K> itrNext;
+		boolean add;
+		while(itr != null) {
+			itrNext = itr.next;
+			if(itrNext == null) {
+				//last element. so add
+				add = true;
+			} else {
+				int compareTo = itr.data.compareTo(itrNext.data);
+				if(compareTo < 0) {
+					add = false;
+				} else {
+					add = true;
+				}
+			}
+			if(add) {
+				if(itrForNewList == null) {
+					header = itr;
+				} else {
+					itrForNewList.next = itr;
+				}
+				itrForNewList = itr;
+			}
+			itr = itrNext;
+		}
+		itrForNewList.next = null;
 	}
 
 }

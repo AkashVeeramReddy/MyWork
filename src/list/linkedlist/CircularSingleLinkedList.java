@@ -1,9 +1,5 @@
 package list.linkedlist;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import list.linkedlist.SingleLinkedList.Node;
 
 /**
  * In circular linked list, last element points to the head
@@ -53,7 +49,6 @@ public class CircularSingleLinkedList<K> extends SingleLinkedList<K> {
 	 * @return circular linked list containing right half,original list will contain left half.
 	 */
 	public CircularSingleLinkedList<K> splitIntoTwoHalves() {
-		List<CircularSingleLinkedList<K>> list = new ArrayList<CircularSingleLinkedList<K>>();
 		// find middle
 		Node<K> beg2ndhalf = null;
 		Node<K> end2ndhalf = null;
@@ -61,12 +56,10 @@ public class CircularSingleLinkedList<K> extends SingleLinkedList<K> {
 		Node<K> end1stHalf = null;
 		Node<K> itrNode = header;
 		Node<K> doubleItrNode = header;
-		Node<K> prevItrNode = null;
 		if(header == null)
 			return null;
 		
 		while(doubleItrNode.next != header && doubleItrNode.next.next != header) {
-			prevItrNode = itrNode;
 			itrNode = itrNode.next;
 			doubleItrNode = doubleItrNode.next.next;
 		}
