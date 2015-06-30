@@ -1,18 +1,21 @@
-package tree;
+package tree.bst;
 
 import list.IList;
 import list.linkedlist.MyLinkedList;
 
 public class TestBinarySearchTree {
 	public static void main(String[] args) {
-		BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
+		
+		Integer[] array = new Integer[] {4, 2, 5, 1, 3};
+		BinarySearchTree.getSortedOrder(array);
+		/*BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.add(50);
 		tree.add(25);
 		tree.add(75);
 		tree.add(10);
 		tree.add(0);
 		tree.add(100);
-		tree.showImage();
+		tree.showImage();*/
 		/*ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
 		tree.add(50);
 		tree.add(25);

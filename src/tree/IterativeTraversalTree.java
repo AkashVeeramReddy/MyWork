@@ -5,7 +5,7 @@ import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
 import stack.IStack;
 
-public class IterativeTraversalBST<K extends Comparable<? super K>> extends BinarySearchTree<K> {
+public class IterativeTraversalTree<K> extends BinaryTree<K> {
 	
 	public IList<K> populateIterativePreorderTraversal() {
 		IList<K> nodes = new MyArrayList<K>();

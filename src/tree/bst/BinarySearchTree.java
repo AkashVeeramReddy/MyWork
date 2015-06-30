@@ -1,5 +1,5 @@
-package tree;
-import static tree.BinarySearchTreeType.*;
+package tree.bst;
+import static tree.bst.BinarySearchTreeType.*;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -11,14 +11,16 @@ import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 import queue.IQueue;
 import list.linkedlist.MyLinkedList;
+import tree.BinaryTree;
+import tree.TreeNode;
 import utils.FileUtils;
 import utils.MyConstants;
 import utils.MyUtilities;
 import utils.PatternUtils;
-public class BinarySearchTree<K extends Comparable<? super K>> {
+public class BinarySearchTree<K extends Comparable<? super K>> extends BinaryTree<K>{
 	
-	protected TreeNode<K> root;
 	protected BinarySearchTreeType treeType;
+	
 	public BinarySearchTree(){
 		this(INORDER_ASCENDING);
 	}
@@ -63,10 +65,12 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		}
 	}
 	
+	/*
 	protected TreeNode<K> makeNode(K element) {
 		return new TreeNode<K>(element, null, null);
 	}
-
+	*/
+	
 	public boolean isAscendingSearchTree() {
 		switch (treeType) {
 		case INORDER_ASCENDING:
@@ -78,7 +82,7 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		}
 	}
 	
-	public boolean contains(K element){
+	public boolean iterativeContains(K element){
 		TreeNode<K> itr= root;
 		while (itr != null) {
 			int compareTo = element.compareTo(itr.data);
@@ -93,7 +97,7 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		return false;
 	}
 	
-	private boolean contains(TreeNode<K> node,K element){
+	protected boolean contains(TreeNode<K> node,K element){
 		if (node != null) {
 			int compareTo = element.compareTo(node.data);
 			if(compareTo == 0) {
@@ -107,134 +111,13 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		return false;
 	}
 	
-	public boolean recursiveContains(K element){
+	/*
+	public boolean contains(K element){
 		return contains(root, element);
 	}
+	*/
 	
-	@Override
-	public String toString() {
-		return toString(root);
-	}
 	
-	private String toString(TreeNode<K> root) {
-		if(root == null) {
-			return "";
-		}
-		StringBuilder builder = new StringBuilder();
-		builder.append(toString(root.left));
-		builder.append(",");
-		builder.append(root.data);
-		builder.append(",");
-		builder.append(toString(root.right));
-		return builder.toString();
-	}
-	
-	public void showImage() throws RuntimeException {
-		String dotContents = getDotFileContents();
-		
-		File homeFolder = new File(MyConstants.USER_HOME);
-		File dotFile = new File(homeFolder,"tree.dot");
-		File imageFile = null;
-		try {
-			if(!dotFile.exists()) {
-				dotFile.createNewFile();
-			}
-			FileUtils.writeToFile(dotFile, dotContents);
-			imageFile = new File(homeFolder, "tree.png");
-			/*if(!imageFile.exists()) {
-				imageFile.createNewFile();
-			}*/
-			Runtime.getRuntime().exec("dot -Tpng "+dotFile.getAbsolutePath()+
-					" -o " + imageFile.getAbsolutePath());
-			Desktop.getDesktop().open(imageFile);
-		} catch (Exception e) {
-			new RuntimeException(e);
-		} finally {
-			//imageFile.delete();
-			//dotFile.delete();
-		}
-	}
-
-	protected String getDotFileContents() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("digraph DotContents {");
-		builder.append(MyConstants.NEW_LINE);
-		
-		builder.append(getDotFileContents(root));
-		builder.append(MyConstants.NEW_LINE);
-		builder.append("}");
-		
-		return builder.toString();
-		
-	}
-	
-	protected StringBuilder getDotFileContents(TreeNode<K> ptrRoot) {
-		
-		StringBuilder builder = new StringBuilder();
-		if(ptrRoot == null)
-			return builder;
-		String string = ptrRoot.data.toString();
-		Matcher m = PatternUtils.WHITESPACE_PATTERN.matcher(string);
-		String nodeName = m.replaceAll("");
-		builder.append(nodeName);
-		builder.append(MyConstants.NEW_LINE);
-		
-		if(ptrRoot.left == null && ptrRoot.right == null) {
-			return builder;
-		}
-		
-		if(ptrRoot.left != null) {
-			builder.append(getDotFileContents(ptrRoot.left));
-			builder.append(MyConstants.NEW_LINE);
-			
-			String leftStr = ptrRoot.left.data.toString();
-			Matcher leftM = PatternUtils.WHITESPACE_PATTERN.matcher(leftStr);
-			String leftNodeName = leftM.replaceAll("");
-			
-			builder.append(nodeName);
-			builder.append(" " + "->" + " ");
-			builder.append(leftNodeName);
-			
-			builder.append(MyConstants.NEW_LINE);
-		} else {
-			String leftNull = "left" + nodeName;
-			builder.append(leftNull);
-			builder.append(" [label=\"null\"]");
-			builder.append(MyConstants.NEW_LINE);
-			
-			builder.append(nodeName);
-			builder.append(" " + "->" + " ");
-			builder.append(leftNull);
-			
-			builder.append(MyConstants.NEW_LINE);
-		}
-		if(ptrRoot.right != null) {
-			builder.append(getDotFileContents(ptrRoot.right));
-			builder.append(MyConstants.NEW_LINE);
-			
-			String rightStr = ptrRoot.right.data.toString();
-			Matcher rightM = PatternUtils.WHITESPACE_PATTERN.matcher(rightStr);
-			String rightNodeName = rightM.replaceAll("");
-			
-			builder.append(nodeName);
-			builder.append(" " + "->" + " ");
-			builder.append(rightNodeName);
-			
-			builder.append(MyConstants.NEW_LINE);
-		} else {
-			String rightNull = "right" + nodeName;
-			builder.append(rightNull);
-			builder.append(" [label=\"null\"]");
-			builder.append(MyConstants.NEW_LINE);
-			
-			builder.append(nodeName);
-			builder.append(" " + "->" + " ");
-			builder.append(rightNull);
-			
-			builder.append(MyConstants.NEW_LINE);
-		}
-		return builder;
-	}
 
 	public boolean remove(K element) {
 		TreeNode<K> itr = root;
@@ -268,7 +151,7 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		return false;
 	}
 	
-	private TreeNode<K> findReplacementElement(TreeNode<K> ele) {
+	protected TreeNode<K> findReplacementElement(TreeNode<K> ele) {
 		if(ele.right != null) {
 			return findNextElement(ele);
 		} else if(ele.left != null) {
@@ -277,7 +160,7 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		return null;
 	}
 	
-	private TreeNode<K> findNextElement(TreeNode<K> ele) {
+	protected TreeNode<K> findNextElement(TreeNode<K> ele) {
 		TreeNode<K> itr = ele.right;
 		TreeNode<K> parent = ele;
 		while(itr.left != null) {
@@ -288,7 +171,7 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		return itr;
 	}
 	
-	private TreeNode<K> findPreviousElement(TreeNode<K> ele) {
+	protected TreeNode<K> findPreviousElement(TreeNode<K> ele) {
 		TreeNode<K> itr = ele.left;
 		TreeNode<K> parent = ele;
 		while(itr.right != null) {
@@ -298,5 +181,60 @@ public class BinarySearchTree<K extends Comparable<? super K>> {
 		parent.right = null;
 		return itr;
 	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/print-bst-keys-in-the-given-range/
+	 * 
+	 * Given two values k1 and k2 (where k1 < k2) and a root pointer to a Binary Search Tree.
+	 *  Print all the keys of tree in range k1 to k2. i.e. print all x such that k1<=x<=k2
+	 *  and x is a key of given BST. Print all the keys in increasing order.
+	 * @param start
+	 * @param end
+	 */
+	public void printElementsInRange(K start,K end) {
+		printElementsInRange(root,start, end);
+	}
+	
+	protected void printElementsInRange(TreeNode<K> ptr, K start, K end) {
+		K data = ptr.data;
+		int cmpStart = data.compareTo(start);
+		int cmpEnd = data.compareTo(end);
+		
+		if(cmpStart >= 0) {
+			printElementsInRange(start, data);
+		}
+		if(cmpStart >= 0 && cmpEnd <= 0) {
+			System.out.println(data);
+		}
+		if(cmpEnd <= 0) {
+			printElementsInRange(data, end);
+		}
+		
+	}
 
+	/**
+	 * http://www.geeksforgeeks.org/sorted-order-printing-of-an-array-that-represents-a-bst/
+	 * 
+	 * Given an array that stores a complete Binary Search Tree, write a function that efficiently prints the given array in ascending order.
+
+		For example, given an array [4, 2, 5, 1, 3], the function should print 1, 2, 3, 4, 5
+	 */
+	public static <K extends Comparable<? super K>> void getSortedOrder(K[] array) {
+		getSortedOrder(array,0);
+	}
+	public static <K extends Comparable<? super K>> void getSortedOrder(K[] array,int start) {
+		if(start > array.length -1) {
+			return;
+		} else if(start == array.length -1) {
+			System.out.println(array[start]);
+			return;
+		} else {
+			//node has children
+			int leftChild = 2*start + 1;
+			getSortedOrder(array,leftChild);
+			System.out.println(array[start]);
+			int rightChild = 2*(start + 1);
+			getSortedOrder(array,rightChild);
+		}
+	}
 }

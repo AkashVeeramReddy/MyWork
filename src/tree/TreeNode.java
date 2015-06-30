@@ -2,11 +2,11 @@ package tree;
 
 public class TreeNode<K> {
 
-	K data;
-	TreeNode<K> left;
-	TreeNode<K> right;
+	public K data;
+	public TreeNode<K> left;
+	public TreeNode<K> right;
 	
-	TreeNode(K data,TreeNode<K> left,TreeNode<K> right){
+	public TreeNode(K data,TreeNode<K> left,TreeNode<K> right){
 		this.data = data;
 		this.left = left;
 		this.right = right;

@@ -1,0 +1,30 @@
+digraph tree1 {
+	//nodes
+	50
+	25
+	75
+	12
+	38
+	62
+	88
+	0
+	100
+	right12 [label = "null"]
+	left88 [label = "null"]
+	
+	//edges
+	
+	50 -> 25 [label="l"]
+	50 -> 75 [label="r"]
+	
+	25 -> 12 [label="l"]
+	25 -> 38 [label="r"]
+	75 -> 62 [label="l"]
+	75 -> 88 [label="r"]
+	
+	12 -> 0 [label="l"]
+	12 -> right12 [label="r"]
+	
+	88 -> left88 [label="l"]
+	88 -> 100 [label="r"]
+}

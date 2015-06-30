@@ -1,4 +1,7 @@
-package tree;
+package tree.bst;
+
+import tree.TreeNode;
+import tree.TreeNodeWithParent;
 
 public class BinarySearchTreeWithParent<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	

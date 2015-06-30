@@ -1,0 +1,11 @@
+digraph tree1 {
+	//nodes
+	1
+	0
+	right1 [label = "null"]
+	
+	//edges
+	
+	1 -> 0 [label="l"]
+	1 -> right1 [label="r"]
+}

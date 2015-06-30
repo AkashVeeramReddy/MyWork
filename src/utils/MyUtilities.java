@@ -20,12 +20,6 @@ public class MyUtilities {
 		array[idx2] = temp;
 	}
 	
-	public static <K> void swap(K data1,K data2) {
-		K temp = data1;
-		data1 = data2;
-		data2 = temp;
-	}
-	
 	public static <K extends Comparable<? super K>> K getMaxElement(K... elements) {
 		return getMaxElementinArray(elements);
 	}

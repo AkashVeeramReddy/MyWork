@@ -1,4 +1,4 @@
-package tree;
+package tree.bst;
 
 public enum BinarySearchTreeType {
 	/**
