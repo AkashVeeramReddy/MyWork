@@ -4,7 +4,6 @@ import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
 import stack.IStack;
-import sun.org.mozilla.javascript.Node;
 
 public class IterativeTraversalTree<K> extends BinaryTree<K> {
 	
