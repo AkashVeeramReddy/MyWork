@@ -8,10 +8,9 @@ digraph tree1 {
 	62
 	88
 	0
-	100
 	right12 [label = "null"]
 	left88 [label = "null"]
-	
+	100
 	//edges
 	
 	50 -> 25 [label="l"]

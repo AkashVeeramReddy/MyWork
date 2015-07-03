@@ -4,6 +4,7 @@ import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
 import stack.IStack;
+import sun.org.mozilla.javascript.Node;
 
 public class IterativeTraversalTree<K> extends BinaryTree<K> {
 	
@@ -66,5 +67,46 @@ public class IterativeTraversalTree<K> extends BinaryTree<K> {
 		}
 		return nodes;
 	}
-	
+	/**
+	 * http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/
+	 * 
+	 * Boundary Traversal of binary tree
+		Given a binary tree, print boundary nodes of the binary tree Anti-Clockwise starting from the root.
+		For example, boundary traversal of the following tree is “20 8 4 10 14 25 22″
+	 * @return
+	 */
+	public IList<K> populateBoundaryTraversal() {
+		IList<K> nodes = new MyArrayList<K>();
+		//get non leaf nodes in left edge
+		TreeNode<K> ptr = root;
+		while(ptr != null) {
+			nodes.add(ptr.data);
+			ptr = ptr.left;
+		}
+		//populate leaf nodes
+		populateLeafNodesInInorderFashion(root.right, nodes);
+		//populate non leaf nodes in right edge
+		
+		return nodes;
+	}
+	public void populateNonLeafNodesInRightEdge(TreeNode<K> ptr,IList<K> list) {
+		if(ptr == null) {
+			return;
+		} else {
+			populateNonLeafNodesInRightEdge(ptr.right, list);
+			list.add(ptr.data);
+		}
+		
+	}
+	public void populateLeafNodesInInorderFashion(TreeNode<K> ptr,IList<K> list) {
+		if(ptr == null) {
+			return;
+		} else if(ptr.left == null && ptr.right == null) {
+			//leaf
+			list.add(ptr.data);
+		} else {
+			populateLeafNodesInInorderFashion(ptr.left, list);
+			populateLeafNodesInInorderFashion(ptr.right, list);
+		}
+	}
 }

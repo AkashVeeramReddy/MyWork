@@ -2,6 +2,11 @@ package tree.bst;
 
 import static tree.bst.BinarySearchTreeType.INORDER_ASCENDING;
 import static tree.bst.BinarySearchTreeType.INORDER_DESCENDING;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
@@ -57,6 +62,122 @@ public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends B
 			return data;
 		}
 		
+	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/merge-two-bsts-with-limited-extra-space/
+	 * 
+	 * Given two Binary Search Trees(BST), print the elements of both BSTs in sorted form.
+	 *  The expected time complexity is O(m+n) where m is the number of nodes in first tree and n is the number of nodes in second tree.
+	 *  Maximum allowed auxiliary space is O(height of the first tree + height of the second tree).
+	 * @param tree
+	 */
+	public List<K> getSortedOrder(BinarySearchTree<K> tree) {
+		List<K> list = new ArrayList<K>();
+		Stack<TreeNode<K>> stack1 = new Stack<TreeNode<K>>();
+		if(root != null) {
+			stack1.push(root);
+		}
+		Stack<TreeNode<K>> stack2 = new Stack<TreeNode<K>>();
+		if(tree.root != null) {
+			stack2.push(tree.root);
+		}
+		//ptr for stacks
+		TreeNode<K> ptr1 = root;
+		TreeNode<K> ptr2 = tree.root;
+		
+		TreeNode<K> check1 = null;
+		TreeNode<K> check2 = null;
+		while(!(stack1.empty() && stack2.empty())) {
+			// at least one is not empty
+			if(!stack1.empty() && !stack2.empty()) {
+				//both not empty
+				while(ptr1.left != null) {
+					stack1.push(ptr1.left);
+					ptr1 = ptr1.left;
+				}
+				while(ptr2.left != null) {
+					stack2.push(ptr2.left);
+					ptr2 = ptr2.left;
+				}
+				if(check1 == null) {
+					check1 = stack1.pop();
+					if(check1.right != null) {
+						ptr1 = check1.right;
+						stack1.push(ptr1);
+					}
+				}
+					
+				if(check2 == null) {
+					check2 = stack2.pop();
+					if(check2.right != null) {
+						ptr2 = check2.right;
+						stack2.push(ptr2);
+					}
+				}
+					
+				if((check1.data.equals(25)) && (check2.data.equals(48))) {
+					System.out.println();
+				}
+				int compareTo = check1.data.compareTo(check2.data);
+				if(compareTo == 0) {
+					//both elements same
+					list.add(check1.data);
+					list.add(check2.data);
+					/*if(check1.right != null) {
+						ptr1 = check1.right;
+						stack1.push(ptr1);
+					}
+					if(check2.right != null) {
+						ptr2 = check2.right;
+						stack2.push(ptr2);
+					}*/
+					check1 = null;
+					check2 = null;
+				} else if(compareTo < 0) {
+					//check 1 lesser
+					list.add(check1.data);
+					/*if(check1.right != null) {
+						ptr1 = check1.right;
+						stack1.push(ptr1);
+					}*/
+					check1 = null;
+				} else {
+					//check 2 smaller
+					list.add(check2.data);
+					/*if(check2.right != null) {
+						ptr2 = check2.right;
+						stack2.push(ptr2);
+					}*/
+					check2 = null;
+				}
+			} else if(!stack1.empty()) {
+				//stack 2 empty
+				while(ptr1.left != null) {
+					stack1.push(ptr1.left);
+					ptr1 = ptr1.left;
+				}
+				TreeNode<K> pop = stack1.pop();
+				list.add(pop.data);
+				if(pop.right != null) {
+					ptr1 = pop.right;
+					stack1.push(ptr1);
+				}
+			} else if(!stack2.empty()) {
+				//stack 1 empty
+				while(ptr2.left != null) {
+					stack2.push(ptr2.left);
+					ptr2 = ptr2.left;
+				}
+				TreeNode<K> pop = stack2.pop();
+				list.add(pop.data);
+				if(pop.right != null) {
+					ptr2 = pop.right;
+					stack2.push(ptr2);
+				}
+			}
+		}
+		return list;
 	}
 	
 	public static <I extends Comparable<? super I>> TreeNode<I> getBSTFrom(I[] sortedArrayinAscendingOrder) {

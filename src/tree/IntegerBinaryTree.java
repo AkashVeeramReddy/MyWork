@@ -6,11 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import list.IList;
+import list.arraylist.MyArrayList;
+
 import tree.examples.TreeExamples;
 import utils.FileUtils;
 
 
-public class IntegerBinaryTree extends BinaryTree<Integer> {
+public class IntegerBinaryTree extends BinaryTreeComparable<Integer> {
 	
 	public IntegerBinaryTree() {
 		
@@ -201,6 +204,168 @@ public class IntegerBinaryTree extends BinaryTree<Integer> {
 		else {
 			return root.data + Math.max(getMaxSumInPath(root.left),
 					getMaxSumInPath(root.right));
+		}
+	}
+	
+	public boolean isSumTree() {
+		return getSumInfo(root).isSum;
+	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/check-if-a-given-binary-tree-is-sumtree/
+	 * 
+	 * Write a function that returns true if the given Binary Tree is SumTree else false.
+	 *  A SumTree is a Binary Tree where the value of a node is equal to sum of the nodes present in its left subtree and right subtree.
+	 *  An empty tree is SumTree and sum of an empty tree can be considered as 0. A leaf node is also considered as SumTree.
+
+		Following is an example of SumTree.
+		
+		          26
+		        /   \
+		      10     3
+		    /    \     \
+		  4      6      3
+	 * @param ptrRoot
+	 * @return
+	 */
+	protected IsSumInfo getSumInfo (TreeNode<Integer> ptrRoot) {
+		if(ptrRoot == null) {
+			IsSumInfo isSumInfo = new IsSumInfo();
+			isSumInfo.isSum = true;
+			return isSumInfo;
+		} else {
+			if(ptrRoot.left == null && ptrRoot.right == null) {
+				IsSumInfo isSumInfo = new IsSumInfo();
+				isSumInfo.isSum = true;
+				isSumInfo.subTreeSum = ptrRoot.data;
+				return isSumInfo;
+			} else /*if(ptrRoot.left != null && ptrRoot.right != null)*/ {
+				IsSumInfo sumInfoLeft = getSumInfo(ptrRoot.left);
+				IsSumInfo sumInfoRight = getSumInfo(ptrRoot.right);
+				
+				int sumLeftAndRight = sumInfoLeft.subTreeSum + sumInfoRight.subTreeSum;
+				if(sumInfoLeft.isSum && sumInfoRight.isSum) {
+					
+					if(sumLeftAndRight == ptrRoot.data) {
+						sumInfoLeft.isSum = true;
+						sumInfoLeft.subTreeSum = 2*sumLeftAndRight;
+						return sumInfoLeft;
+					} else {
+						sumInfoLeft.isSum = false;
+						sumInfoLeft.subTreeSum = sumLeftAndRight + ptrRoot.data;
+						return sumInfoLeft;
+					}
+				} else {
+					sumInfoLeft.isSum = false;
+					sumInfoLeft.subTreeSum = sumLeftAndRight + ptrRoot.data;
+					return sumInfoLeft;
+				}
+			}
+		}
+	}
+	/**
+	 * http://www.geeksforgeeks.org/construct-a-special-tree-from-given-preorder-traversal/
+	 * @param preorder
+	 * @param leafInfo - true if it is a leaf, else non leaf
+	 */
+	public void populateWithSpecialPreorder(Integer[] preorder,Boolean[] leafInfo) {
+		root = populateWithSpecialPreorder(preorder, leafInfo, 0).root;
+	}
+	
+	public SpecialPreorderInfo populateWithSpecialPreorder(Integer[] preorder,
+			Boolean[] leafInfo,int idx) {
+		if(idx >= preorder.length) {
+			SpecialPreorderInfo info = new SpecialPreorderInfo();
+			info.root = null;
+			info.lastIdx = -1;
+			return info;
+		}
+		if(leafInfo[idx]) {
+			//node leaf
+			SpecialPreorderInfo info = new SpecialPreorderInfo();
+			TreeNode<Integer> node = makeNode(preorder[idx]);
+			info.root = node;
+			info.lastIdx = idx;
+			return info;
+		} else {
+			//non leaf
+			SpecialPreorderInfo info = new SpecialPreorderInfo();
+			
+			TreeNode<Integer> node = makeNode(preorder[idx]);
+			
+			SpecialPreorderInfo leftInfo = populateWithSpecialPreorder(preorder, leafInfo,idx + 1);
+			node.left = leftInfo.root;
+			
+			SpecialPreorderInfo rightInfo = populateWithSpecialPreorder(preorder,
+					leafInfo,leftInfo.lastIdx + 1);
+			node.right = rightInfo.root;
+			
+			info.root = node;
+			info.lastIdx = rightInfo.lastIdx;
+			return info;
+		}
+	}
+	
+	static class SpecialPreorderInfo {
+		int lastIdx = 0;
+		TreeNode<Integer> root;
+	}
+	static class IsSumInfo {
+		boolean isSum = false;
+		int subTreeSum = 0;
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("IsSumInfo [isSum=");
+			builder.append(isSum);
+			builder.append(", subTreeSum=");
+			builder.append(subTreeSum);
+			builder.append("]");
+			return builder.toString();
+		} 
+		
+	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/
+	 * 
+	 * Boundary Traversal of binary tree
+		Given a binary tree, print boundary nodes of the binary tree Anti-Clockwise starting from the root.
+		For example, boundary traversal of the following tree is “20 8 4 10 14 25 22″
+	 * @return
+	 */
+	public IList<Integer> populateBoundaryTraversal() {
+		IList<Integer> nodes = new MyArrayList<Integer>();
+		//get non leaf nodes in left edge
+		TreeNode<Integer> ptr = root;
+		while(ptr.left != null) {
+			nodes.add(ptr.data);
+			ptr = ptr.left;
+		}
+		//populate leaf nodes
+		populateLeafNodesInInorderFashion(root, nodes);
+		//populate non leaf nodes in right edge
+		populateNonLeafNodesInRightEdge(root.right, nodes);
+		return nodes;
+	}
+	public void populateNonLeafNodesInRightEdge(TreeNode<Integer> ptr,IList<Integer> list) {
+		if(ptr.right == null) {
+			return;
+		} else {
+			populateNonLeafNodesInRightEdge(ptr.right, list);
+			list.add(ptr.data);
+		}
+		
+	}
+	public void populateLeafNodesInInorderFashion(TreeNode<Integer> ptr,IList<Integer> list) {
+		if(ptr == null) {
+			return;
+		} else if(ptr.left == null && ptr.right == null) {
+			//leaf
+			list.add(ptr.data);
+		} else {
+			populateLeafNodesInInorderFashion(ptr.left, list);
+			populateLeafNodesInInorderFashion(ptr.right, list);
 		}
 	}
 

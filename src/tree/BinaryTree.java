@@ -11,13 +11,16 @@ import queue.IQueue;
 import tree.examples.TreeExamples;
 import utils.FileUtils;
 import utils.MyConstants;
-import utils.MyUtilities;
 import utils.PatternUtils;
 import utils.ValidationUtils;
 
 public class BinaryTree<K> {
 	
-	protected TreeNode<K> root;
+	/*
+	 * if protected, not able to access in subclasses in different package.
+	 * no idea why
+	 */
+	public TreeNode<K> root;
 	public BinaryTree() {
 		
 	}
@@ -306,44 +309,89 @@ public class BinaryTree<K> {
 	 * http://www.geeksforgeeks.org/foldable-binary-trees/
 	 * Question: Given a binary tree, find out if the tree can be folded or not.
 
-		A tree can be folded if left and right subtrees of the tree are structure wise mirror image of each other. An empty tree is considered as foldable.
-		
-		Consider the below trees:
-		(a) and (b) can be folded.
-		(c) and (d) cannot be folded.
-		
-		(a)
-		       10
-		     /    \
-		    7      15
-		     \    /
-		      9  11
-		
-		(b)
-		        10
-		       /  \
-		      7    15
-		     /      \
-		    9       11
-		
-		(c)
-		        10
-		       /  \
-		      7   15
-		     /    /
-		    5   11
-		
-		(d)
-		
-		         10
-		       /   \
-		      7     15
-		    /  \    /
-		   9   10  12
 	 * @param root2
 	 * @return
 	 */
-	protected boolean isFoldable(TreeNode<K> root2) {
+	protected boolean isFoldable(TreeNode<K> root) {
+		if(root == null) {
+			return true;
+		}
+		if(root.left != null && root.right != null) {
+			//mirrorize root's right subtree
+			mirrorize(root.right);
+			return isIdenticalStructure(root.left, root.right);
+		}
 		return false;
 	}
+	
+	protected boolean isIdenticalStructure(TreeNode<K> ptr1,TreeNode<K> ptr2) {
+		if(ptr1 == null && ptr2 == null) {
+			return true;
+		} else if(ptr1 != null && ptr2 != null) {
+			return isIdenticalStructure(ptr1.left, ptr2.left) &&
+					isIdenticalStructure(ptr1.right, ptr2.right);
+		}
+		return false;
+	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/
+	 * 
+	 * Given two binary trees, check if the first tree is subtree of the second one.
+	 *  A subtree of a tree T is a tree S consisting of a node in T and all of its descendants in T.
+	 *   The subtree corresponding to the root node is the entire tree; 
+	 *   the subtree corresponding to any other node is called a proper subtree.
+	 * @param subTree
+	 * @return - is subTree a sub tree of this tree
+	 */
+	public boolean isSubtree(BinaryTree<K> subTree) {
+		return isSubtree(root, subTree.root);
+	}
+	
+	public boolean isSubtree(TreeNode<K> ptrTree,TreeNode<K> ptrSubTree) {
+		if(ptrTree == null && ptrSubTree == null) {
+			return true;
+		} else if(ptrTree == null || ptrSubTree == null) {
+			return false;
+		} else {
+			//both not null
+			boolean equals = ValidationUtils.nullSafeEquals(ptrTree.data, ptrSubTree.data);
+			if(equals) {
+				/*
+				 * If data is equal 2 chances can arise
+				 * 1) left subtrees of both are equal and right subtrees of both are equal.
+				 * 2) check for ptrSubTree in left subtree and right sub tree
+				 */
+				return (isEqual(ptrTree.left,ptrSubTree.left) && isEqual(ptrTree.right,ptrSubTree.right))
+						|| (
+							(isSubtree(ptrTree.left,ptrSubTree)) || (isSubtree(ptrTree.right,ptrSubTree))
+							);
+			} else {
+				//check for ptrSubTree in left subtree and right sub tree
+				return isSubtree(ptrTree.left,ptrSubTree) || isSubtree(ptrTree.left,ptrSubTree);
+			}
+		}
+	}
+	
+	/**
+	 * are two trees equal
+	 * @param tree
+	 * @return
+	 */
+	public boolean isEqual(BinaryTree<K> tree) {
+		return isEqual(root,tree.root);
+	}
+	
+	protected boolean isEqual(TreeNode<K> ptr1,TreeNode<K> ptr2) {
+		if(ptr1 == null && ptr2 == null) {
+			return true;
+		} else if(ptr1 != null && ptr2 != null) {
+			return ValidationUtils.nullSafeEquals(ptr1.data, ptr2.data)
+					&& isIdenticalStructure(ptr1.left, ptr2.left) &&
+					isIdenticalStructure(ptr1.right, ptr2.right);
+		}
+		return false;
+	}
+	
+	
 }

@@ -1,0 +1,22 @@
+digraph tree1 {
+	//nodes
+	30
+	
+	10
+	5
+	
+	4
+	6
+	3
+	2
+	//edges
+	
+	30 -> 10 [label="l"]
+	30 -> 5 [label="r"]
+	
+	10 -> 4 [label="l"]
+	10 -> 6 [label="r"]
+	5 -> 3 [label="l"]
+	5 -> 2 [label="r"]
+	
+}
