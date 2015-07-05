@@ -1,5 +1,8 @@
 package tree.bst;
 
+import tree.TreeNode;
+
+
 
 public class AVLTreeComparable<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	
@@ -12,7 +15,15 @@ public class AVLTreeComparable<K extends Comparable<? super K>> extends BinarySe
 	}
 	
 	@Override
-	public boolean add(K element) {
-		return false;
+	protected AVLTreeNode<K> makeNode(K element) {
+		return new AVLTreeNode<K>(element, null, null);
+	}
+	
+	@Override
+	protected void setAttributesWhileAddingNodes(TreeNode<K> itr,
+			TreeNode<K> itrParent, int compareTo) {
+		AVLTreeNode<K> avlItr = (AVLTreeNode<K>) itr;
+		AVLTreeNode<K> avlItrParent = (AVLTreeNode<K>) itrParent;
+		
 	}
 }
