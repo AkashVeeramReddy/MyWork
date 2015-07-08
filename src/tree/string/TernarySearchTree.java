@@ -1,5 +1,11 @@
 package tree.string;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import sun.security.util.Length;
+import utils.MyUtilities;
+
 
 public class TernarySearchTree {
 	
@@ -123,5 +129,39 @@ public class TernarySearchTree {
 		}
 		
 		return search(charArray,fromIdx,child);
+	}
+	
+	public String toString() {
+		return getAllStringsInAlphabeticalOrder().toString();
+	}
+	
+	public List<String> getAllStringsInAlphabeticalOrder() {
+		return getAllStringsInAlphabeticalOrder(root, "");
+	}
+	
+	public List<String> getAllStringsInAlphabeticalOrder(TSTNode rootPtr,String strSeen) {
+		List<String> strings = new ArrayList<String>();
+		if(rootPtr != null) {
+			String newStrSeen = strSeen + rootPtr.data;
+			if(rootPtr.isEndOfString) {
+				strings.add(newStrSeen);
+			}
+			strings.addAll(getAllStringsInAlphabeticalOrder(rootPtr.left, strSeen));
+			strings.addAll(getAllStringsInAlphabeticalOrder(rootPtr.equal, newStrSeen));
+			strings.addAll(getAllStringsInAlphabeticalOrder(rootPtr.right, strSeen));
+		}
+		return strings;
+	}
+	
+	public int getMaxLengthOfString() {
+		return getMaxLengthOfString(root);
+	}
+	
+	protected int getMaxLengthOfString(TSTNode rootPtr) {
+		if(rootPtr != null) {
+			return MyUtilities.getMaxElement(getMaxLengthOfString(rootPtr.left),1 + 
+					getMaxLengthOfString(rootPtr.equal)	,getMaxLengthOfString(rootPtr.right));
+		}
+		return 0;
 	}
 }

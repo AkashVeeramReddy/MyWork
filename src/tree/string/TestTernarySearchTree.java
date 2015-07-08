@@ -11,6 +11,8 @@ public class TestTernarySearchTree {
 		System.out.println(tst.root.toString());
 		tst.add("als");
 		tst.add("as");
+		
+		tst.add("ball");
 		System.out.println();
 		
 		boolean search = tst.search("a");
@@ -22,6 +24,7 @@ public class TestTernarySearchTree {
 		search = tst.search("all");
 		
 		System.out.println(tst);
+		System.out.println(tst.getMaxLengthOfString());
 	}
 
 }
