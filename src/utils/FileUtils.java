@@ -5,9 +5,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
 
 public class FileUtils {
 	
@@ -44,5 +44,31 @@ public class FileUtils {
 			if(writer != null)
 				writer.close( );
 		}
+	}
+	
+	public static File getFile(String testFile,Class<?> clazz) {
+		File file = new File(testFile);
+		if(!file.exists()) {
+			String path = "";
+			try {
+				path = clazz.getProtectionDomain().getCodeSource()
+									.getLocation().toURI().getPath();
+				String regex = File.separator + "bin" +File.separator;
+				String replacement = File.separator + "src" +File.separator;
+				path = path.replaceAll(regex , 
+						replacement);
+				Package package1 = clazz.getPackage();
+				String folderName = path + package1.getName().replace('.', File.separatorChar);
+				String filePath = folderName + File.separator + testFile;
+				file = new File(filePath);
+				if(!file.exists()) {
+					return null;
+				}
+				//path = path + RELATIVE_LOCATION_IMG_FOLDER;
+			} catch (URISyntaxException e) {
+				//e.printStackTrace();
+			}
+		}
+		return file;
 	}
 }

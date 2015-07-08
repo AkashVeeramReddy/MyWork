@@ -5,7 +5,7 @@ import tree.TreeNodeWithParent;
 
 public class BinarySearchTreeWithParent<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	
-	protected TreeNodeWithParent<K> makeNode(K element) {
+	public TreeNodeWithParent<K> makeNode(K element) {
 		TreeNodeWithParent<K> treeNodeWithParent = new TreeNodeWithParent<K>(element, null, null);
 		return treeNodeWithParent;
 	}

@@ -9,7 +9,7 @@ import utils.RotationType;
 
 public class SiblingBinarySearchTree<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	
-	protected SiblingTreeNode<K> makeNode(K element) {
+	public SiblingTreeNode<K> makeNode(K element) {
 		return new SiblingTreeNode<K>(element, null, null);
 	}
 	
