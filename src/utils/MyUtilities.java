@@ -72,23 +72,27 @@ public class MyUtilities {
 	}
 	
 	public static void populateIntegerArrayWithRandomNos(int [][] array) {
+		populateIntegerArrayWithRandomNos(array,10);
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(int [][] array,int maxElement) {
 		for (int i = 0; i < array.length; i++) {
 			for (int j = 0; j < array[0].length; j++) {
 				int no = 0;
 				while(no==0) {
-					no = (int) (Math.random() * 10);
+					no = (int) (Math.random() * maxElement);
 				}
 				array[i][j] = no;
 			}
 		}
 	}
 	
-	public static void populateIntegerArrayWithRandomNos(Integer [][] array) {
+	public static void populateIntegerArrayWithRandomNos(Integer [][] array, int maxEle) {
 		for (int i = 0; i < array.length; i++) {
 			for (int j = 0; j < array[0].length; j++) {
 				int no = 0;
 				while(no==0) {
-					no = (int) (Math.random() * 10);
+					no = (int) (Math.random() * maxEle);
 				}
 				array[i][j] = no;
 			}
@@ -96,11 +100,33 @@ public class MyUtilities {
 		}
 	}
 	
+	public static void populateIntegerArrayWithRandomNos(Integer [][] array) {
+		populateIntegerArrayWithRandomNos(array,10);
+	}
+	
 	public static void populateIntegerArrayWithRandomNos(Integer [] array) {
+		populateIntegerArrayWithRandomNos(array, 10);
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(Integer [] array,int maxEle) {
 		for (int i = 0; i < array.length; i++) {
 			int no = 0;
 			while(no==0) {
-				no = (int) (Math.random() * 10);
+				no = (int) (Math.random() * maxEle);
+			}
+			array[i] = no;
+		}
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(int [] array) {
+		populateIntegerArrayWithRandomNos(array, 10);
+	}
+	
+	public static void populateIntegerArrayWithRandomNos(int [] array,int maxEle) {
+		for (int i = 0; i < array.length; i++) {
+			int no = 0;
+			while(no==0) {
+				no = (int) (Math.random() * maxEle);
 			}
 			array[i] = no;
 		}
