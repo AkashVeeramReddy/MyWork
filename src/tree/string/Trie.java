@@ -1,5 +1,12 @@
 package tree.string;
 
+import java.util.ArrayList;
+import java.util.List;
+/**
+ * http://www.geeksforgeeks.org/trie-insert-and-search/
+ * @author nithin
+ *
+ */
 public class Trie {
 	
 	
@@ -37,14 +44,15 @@ public class Trie {
 			if(childByChar == null) {
 				//create the node with isLeaf false
 				childByChar = new TrieNode(noOfCharacters);
+				childByChar.data = ch;
 				rootPtr.setChildrenByChar(childByChar, ch);
 			}
 			if(fromIdx == charArray.length - 1) {
-				if(childByChar.isLeaf) {
+				if(childByChar.endOfStr) {
 					//string already exists
 					return false;
 				} else {
-					childByChar.isLeaf = true;
+					childByChar.endOfStr = true;
 					return true;
 				}
 			} else {
@@ -72,12 +80,38 @@ public class Trie {
 			if(childByChar == null)
 				return false;
 			if(fromIdx == charArray.length - 1) {
-				return childByChar.isLeaf;
+				return childByChar.endOfStr;
 			} else {
 				return search(charArray, fromIdx+1, childByChar);
 			}
 			
 		}
 		return false;
+	}
+	
+	public String toString() {
+		return getAllStringsInAlphabeticalOrder().toString();
+	}
+	
+	public List<String> getAllStringsInAlphabeticalOrder() {
+		return getAllStringsInAlphabeticalOrder(root, "");
+	}
+	
+	public List<String> getAllStringsInAlphabeticalOrder(TrieNode rootPtr,String strSeen) {
+		List<String> strings = new ArrayList<String>();
+		if(rootPtr != null) {
+			String newStrSeen = strSeen + rootPtr.data;
+			if(rootPtr.endOfStr) {
+				strings.add(newStrSeen);
+			}
+			TrieNode child = null;
+			for (int i = 0; i < rootPtr.children.length; i++) {
+				child = rootPtr.children[i];
+				if(child != null) {
+					strings.addAll(getAllStringsInAlphabeticalOrder(child,newStrSeen));
+				}
+			}
+		}
+		return strings;
 	}
 }

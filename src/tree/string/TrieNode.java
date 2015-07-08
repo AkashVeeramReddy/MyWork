@@ -3,7 +3,7 @@ package tree.string;
 public class TrieNode {
 	
 	public char data = 0;
-	public boolean isLeaf = false;
+	public boolean endOfStr = false;
 	
 	public int noOfChildren;
 	public TrieNode [] children;
@@ -46,21 +46,23 @@ public class TrieNode {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(data);
-		if(!isLeaf) {
+		builder.append(',');
+		builder.append("endOfStr:");
+		builder.append(endOfStr);
+		builder.append(',');
 			//append child
-			builder.append('{');
-			for (int i = 0; i < children.length; i++) {
-				TrieNode child = children[i];
-				if(child != null) {
-					builder.append(child.data);
-					builder.append(":");
-					builder.append(i);
-					builder.append(',');
-				}
+		builder.append('{');
+		for (int i = 0; i < children.length; i++) {
+			TrieNode child = children[i];
+			if(child != null) {
+				builder.append(child.data);
+				builder.append(":");
+				builder.append(i);
+				builder.append(',');
 			}
-			builder.append('}');
 		}
+		builder.append('}');
 		
-		return data + "";
+		return builder.toString();
 	}
 }
