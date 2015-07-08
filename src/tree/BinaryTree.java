@@ -170,7 +170,7 @@ public class BinaryTree<K> {
 		private int minDepthLevel;
 	}
 	
-	protected TreeNode<K> makeNode(K element) {
+	public TreeNode<K> makeNode(K element) {
 		return new TreeNode<K>(element, null, null);
 	}
 	

@@ -1,9 +1,28 @@
 package tree.bst;
 
+import java.io.File;
+
 import tree.TreeNode;
+import tree.fns.IMakeNode;
+import tree.fns.TreePopulate;
 
-public class IntegerBST extends BinarySearchTree<Integer> {
-
+public class IntegerBST extends ExtendedBinarySearchTree<Integer> 
+	implements IMakeNode<Integer, TreeNode<Integer>> {
+	
+	public IntegerBST() {
+		
+	}
+	
+	public IntegerBST(String testFile) {
+		//populateTree(testFile);
+		root = TreePopulate.populateTree(testFile, this);
+	}
+	
+	public IntegerBST(File testFile) {
+		//populateTree(testFile);
+		root = TreePopulate.populateTree(testFile, this);
+	}
+	
 	/**
 	 * http://www.geeksforgeeks.org/check-for-children-sum-property-in-a-binary-tree/
 	 * Check for Children Sum Property in a Binary Tree.

@@ -1,34 +1,33 @@
 package tree;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import list.IList;
 import list.arraylist.MyArrayList;
+import tree.fns.IMakeNode;
+import tree.fns.TreePopulate;
 
-import tree.examples.TreeExamples;
-import utils.FileUtils;
 
-
-public class IntegerBinaryTree extends BinaryTreeComparable<Integer> {
+public class IntegerBinaryTree extends BinaryTreeComparable<Integer> 
+	implements IMakeNode<Integer, TreeNode<Integer>> {
 	
 	public IntegerBinaryTree() {
 		
 	}
 	
 	public IntegerBinaryTree(String testFile) {
-		populateTree(testFile);
+		//populateTree(testFile);
+		root = TreePopulate.populateTree(testFile, this);
 	}
 	
 	public IntegerBinaryTree(File testFile) {
-		populateTree(testFile);
+		//populateTree(testFile);
+		root = TreePopulate.populateTree(testFile, this);
 	}
-	
+
+/*
 	protected void populateTree(String testFile) {
-		File file = getFile(testFile);
+		File file = FileUtils.getFile(testFile,TreeExamples.class);
 		if(file == null) {
 			return;
 		}
@@ -108,37 +107,10 @@ public class IntegerBinaryTree extends BinaryTreeComparable<Integer> {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	protected File getFile(String testFile) {
-		File file = new File(testFile);
-		if(!file.exists()) {
-			String path = "";
-			try {
-				path = TreeExamples.class.getProtectionDomain().getCodeSource()
-									.getLocation().toURI().getPath();
-				String regex = File.separator + "bin" +File.separator;
-				String replacement = File.separator + "src" +File.separator;
-				path = path.replaceAll(regex , 
-						replacement);
-				Package package1 = TreeExamples.class.getPackage();
-				String folderName = path + package1.getName().replace('.', File.separatorChar);
-				String filePath = folderName + File.separator + testFile;
-				file = new File(filePath);
-				if(!file.exists()) {
-					return null;
-				}
-				//path = path + RELATIVE_LOCATION_IMG_FOLDER;
-			} catch (URISyntaxException e) {
-				//e.printStackTrace();
-			}
-		}
-		return file;
-	}
-	
+*/
 	
 	/**
 	 * http://www.geeksforgeeks.org/root-to-leaf-path-sum-equal-to-a-given-number/

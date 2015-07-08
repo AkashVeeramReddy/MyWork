@@ -15,7 +15,7 @@ public class AVLTreeComparable<K extends Comparable<? super K>> extends BinarySe
 	}
 	
 	@Override
-	protected AVLTreeNode<K> makeNode(K element) {
+	public AVLTreeNode<K> makeNode(K element) {
 		return new AVLTreeNode<K>(element, null, null);
 	}
 	

@@ -45,22 +45,42 @@ public class IterativeTraversalTree<K> extends BinaryTree<K> {
 	
 	public IList<K> populateIterativePostorderTraversal() {
 		IList<K> nodes = new MyArrayList<K>();
+		if(root == null)
+			return nodes;
 		MyLinkedList<TreeNode<K>> stack = new MyLinkedList<TreeNode<K>>();
+		if(root.right != null)
+			stack.push(root.right);
 		stack.push(root);
-		TreeNode<K> itrElement = root;
+		TreeNode<K> itrElement = root.left;
 		while(stack.canPop()) {
 			if(itrElement == null) {
 				itrElement = stack.pop();
-				nodes.add(itrElement.data);
-				itrElement = itrElement.right;
-				if(itrElement != null)
-					stack.push(itrElement);
-			} else {
-				/*if(itrElement.right != null)
-					stack.push(itrElement.right);*/
-				if(itrElement.left != null) {
-					stack.push(itrElement.left);
+				if(itrElement.right == null) {
+					nodes.add(itrElement.data);
+					//itrElement set to null
+					itrElement = null;
+				} else {
+					if(stack.canPop() && (stack.getHeader().getData() == itrElement.right)) {
+						//remove the right child
+						stack.pop();
+						//push the poped itrElement again
+						stack.push(itrElement);
+						//point itrElement to right child
+						itrElement = itrElement.right;
+					} else {
+						//right child visited
+						nodes.add(itrElement.data);
+						//itrElement set to null
+						itrElement = null;
+					}
 				}
+			} else {
+				if(itrElement.right != null)
+					stack.push(itrElement.right);
+				stack.push(itrElement);
+				/*if(itrElement.left != null) {
+					stack.push(itrElement.left);
+				}*/
 				itrElement = itrElement.left;
 			}
 		}
