@@ -93,14 +93,14 @@ public class ArrayPrograms {
 		MyUtilities.swap(array, startFirstArray+1, startSecondArray);
 		
 		shuffleArray(array, startFirstArray+2, endFirstArray, startSecondArray+2, endSecondArray);
-		//shuffleArray(array, startFirstArray, endFirstArray, startSecondArray, endSecondArray);
+		//now put a2b2 in its correct place
 	}
 	
 	public static void main(String[] args) {
-		Integer []array = new Integer[10];
-		MyUtilities.populateIntegerArrayWithRandomNos(array,3);
+		Integer []array = new Integer[]{1,2,3,4,11,12,13,14};
+		//MyUtilities.populateIntegerArrayWithRandomNos(array,3);
 		MyUtilities.printSingleDimensionArray(array);
-		seggregateZeroesOnesThenTwoes(array);
+		shuffleArray(array);
 		MyUtilities.printSingleDimensionArray(array);
 	}
 }
