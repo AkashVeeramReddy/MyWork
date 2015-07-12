@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MyUtilities {
 	
 	public static boolean nullSafeEquals(Object o1, Object o2) {
@@ -192,4 +195,8 @@ public class MyUtilities {
 		}
 	}
 	
+	public static <K> String getStringRepOfArray(K[] array) {
+		List<K> asList = Arrays.asList(array);
+		return asList.toString();
+	}
 }

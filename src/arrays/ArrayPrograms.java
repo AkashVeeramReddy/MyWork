@@ -130,6 +130,44 @@ public class ArrayPrograms {
 		
 		return false;
 	}
+	/**
+	 * http://www.geeksforgeeks.org/find-the-minimum-distance-between-two-numbers/
+	 * Given an unsorted array arr[] and two numbers x and y, find the minimum distance
+	 *  between x and y in arr[]. The array might also contain duplicates. You may assume
+	 *   that both x and y are different and present in arr[].
+	 * @param array
+	 * @param no1
+	 * @param no2
+	 * @return
+	 */
+	public static int getMinimumDistanceBtwNumbers(Integer[] array,int no1,int no2) {
+		
+		int itr = 0;
+		int minDif = Integer.MAX_VALUE;
+		int noAtItr;
+		boolean prevSeenNo1 = false;
+		boolean prevSeenNo2 = false;
+		int prevSeenItr = 0;
+		while(itr < array.length) {
+			noAtItr = array[itr];
+			if(noAtItr == no1) {
+				if(prevSeenNo2) {
+					minDif = Math.min(itr - prevSeenItr, minDif);
+				}
+				prevSeenItr = itr;
+			} else if(noAtItr == no2) {
+				if(prevSeenNo1) {
+					minDif = Math.min(itr - prevSeenItr, minDif);
+				}
+				prevSeenItr = itr;
+			} else {
+				//nothing to do
+			}
+			itr++;
+		}
+		
+		return minDif;
+	}
 	
 	public static void main(String[] args) {
 		Integer []array1 = new Integer[]{1,7,4,9};
