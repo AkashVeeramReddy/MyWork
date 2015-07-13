@@ -169,6 +169,46 @@ public class ArrayPrograms {
 		return minDif;
 	}
 	
+	/**
+	 * Count smaller elements on right side
+	   Write a function to count number of smaller elements on right of each element in an array.
+	   Given an unsorted array arr[] of distinct integers, construct another array
+	   countSmaller[] such that countSmaller[i] contains count of smaller elements on right side
+	   of each element arr[i] in array.
+	
+	Examples:
+	
+	Input:   arr[] =  {12, 1, 2, 3, 0, 11, 4}
+	Output:  countSmaller[]  =  {6, 1, 1, 1, 0, 1, 0} 
+	
+	(Corner Cases)
+	Input:   arr[] =  {5, 4, 3, 2, 1}
+	Output:  countSmaller[]  =  {4, 3, 2, 1, 0} 
+	
+	Input:   arr[] =  {1, 2, 3, 4, 5}
+	Output:  countSmaller[]  =  {0, 0, 0, 0, 0}
+	 */
+	public static Integer[] getSmallerEleOnRightSide(Integer[] array) {
+		Integer[] smaller = new Integer[array.length];
+		return smaller;
+	}
+	
+	/**
+	 * Find subarray with given sum
+Given an unsorted array of nonnegative integers, find a continous subarray which adds to a given number.
+
+Examples:
+
+Input: arr[] = {1, 4, 20, 3, 10, 5}, sum = 33
+Ouptut: Sum found between indexes 2 and 4
+
+Input: arr[] = {1, 4, 0, 0, 3, 10, 5}, sum = 7
+Ouptut: Sum found between indexes 1 and 4
+
+Input: arr[] = {1, 4}, sum = 0
+Output: No subarray found
+There may be more than one subarrays with sum as the given sum. The following solutions print first such subarray.
+	 */
 	public static void main(String[] args) {
 		Integer []array1 = new Integer[]{1,7,4,9};
 		Integer []array2 = new Integer[]{3,6,8,5};
