@@ -17,6 +17,14 @@ public class MyUtilities {
 		return no % 2 != 0;
 	}
 	
+	public static boolean isPositive(int no) {
+		return no > 0;
+	}
+	
+	public static boolean isNegative(int no) {
+		return no < 0;
+	}
+	
 	public static <K> void swap(K [] array,int idx1,int idx2) {
 		K temp = array[idx1];
 		array[idx1] = array[idx2];
