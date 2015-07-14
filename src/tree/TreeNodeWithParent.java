@@ -2,11 +2,11 @@ package tree;
 
 public class TreeNodeWithParent<K> extends TreeNode<K> {
 	
+	public TreeNodeWithParent<K> parent;
+	
 	public TreeNodeWithParent(K data, TreeNode<K> left, TreeNode<K> right) {
 		super(data, left, right);
 	}
-
-	TreeNodeWithParent<K> parent;
 
 	public TreeNodeWithParent<K> getParent() {
 		return parent;
