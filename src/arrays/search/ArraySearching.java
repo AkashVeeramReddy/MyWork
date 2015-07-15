@@ -107,10 +107,74 @@ public class ArraySearching {
 		MyUtilities.printSingleDimensionArray(array);
 		return -1;
 	}
+	/**
+	 * http://www.geeksforgeeks.org/largest-subarray-with-equal-number-of-0s-and-1s/
+	 * Given an array containing only 0s and 1s, find the largest subarray which contain equal no of 0s and 1s.
+	 *  Expected time complexity is O(n).
+	 * @param array
+	 * @return
+	 */
+	public static int getLargestSubArrayWithEqualZeroesOnes(Integer[] array) {
+		int noOfZeroes = 0;
+		int noOfOnes = 0;
+		for (int i = 0; i < array.length; i++) {
+			if(array[i] == 0) {
+				noOfZeroes++;
+			} else {
+				noOfOnes++;
+			}
+		}
+		Integer[] noOfZeroesOnLeft = new Integer[array.length];
+		for (int i = 0; i < array.length; i++) {
+			noOfZeroesOnLeft[array.length - i -1] = noOfZeroes;
+			if(array[i] == 0) {
+				noOfZeroes--;
+			}
+		}
+		Integer[] noOfOnesOnRight = new Integer[array.length];
+		for (int i = 0; i < array.length; i++) {
+			noOfOnesOnRight[i] = noOfOnes;
+			if(array[array.length - i -1] == 1) {
+				noOfOnes--;
+			}
+		}
+		//left idx tracks zeroes
+		//right idx tracks ones
+		int noOfZeroesInSubArray;
+		int noOfOnesInSubArray;
+		for(int leftIdx = 0,rightIdx = array.length-1; leftIdx!=rightIdx && leftIdx <rightIdx;) {
+			
+			noOfZeroesInSubArray = noOfZeroesOnLeft[rightIdx] - (leftIdx == 0?0:noOfZeroesOnLeft[leftIdx - 1]);
+			noOfOnesInSubArray = noOfOnesOnRight[leftIdx] - (rightIdx == (array.length-1)?0:noOfOnesOnRight[rightIdx + 1]);
+			if(noOfZeroesInSubArray == noOfOnesInSubArray) {
+				System.out.println("start:"+leftIdx+",end:"+rightIdx);
+				return noOfZeroesInSubArray;
+			} else {
+				if(noOfZeroesInSubArray < noOfOnesInSubArray) {
+					if(array[rightIdx] == 1) {
+						rightIdx--;
+						continue;
+					} else {
+						leftIdx++;
+					}
+				} else {
+					//noOfZeroesInSubArray > noOfOnesInSubArray
+					if(array[leftIdx] == 0) {
+						leftIdx++;
+						continue;
+					} else {
+						rightIdx--;
+					}
+				}
+			}
+		}
+		return 0;
+	}
+	
 	public static void main(String[] args) {
-		Integer [] array = new Integer[]{ 2, 3, -7, 6, 8, 1, -10, 15 };
-		int findSmallestPositiveEleMissing = findSmallestPositiveEleMissing(array);
-		System.out.println(findSmallestPositiveEleMissing);
+		Integer [] array = new Integer[10];
+		int zeroes = getLargestSubArrayWithEqualZeroesOnes(array);
+		System.out.println(zeroes);
 	}
 	
 }
