@@ -53,8 +53,8 @@ public class FileUtils {
 			try {
 				path = clazz.getProtectionDomain().getCodeSource()
 									.getLocation().toURI().getPath();
-				String regex = File.separator + "bin" +File.separator;
-				String replacement = File.separator + "src" +File.separator;
+				String regex =  "bin" ;
+				String replacement = "src" ;
 				path = path.replaceAll(regex , 
 						replacement);
 				Package package1 = clazz.getPackage();
