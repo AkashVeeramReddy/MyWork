@@ -1,5 +1,6 @@
 package online.hackerrank.list.linked.single;
 
+
 public class SingleIntLinkedList {
 	
 	public Node head;
