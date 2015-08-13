@@ -1,5 +1,9 @@
 package tree;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
@@ -126,6 +130,56 @@ public class IterativeTraversalTree<K> extends BinaryTree<K> {
 		} else {
 			populateLeafNodesInInorderFashion(ptr.left, list);
 			populateLeafNodesInInorderFashion(ptr.right, list);
+		}
+	}
+	
+	/**
+	 * Print Nodes in Top View of Binary Tree
+Top view of a binary tree is the set of nodes visible when the tree is viewed from the top. Given a binary tree, print the top view of it. The output nodes can be printed in any order. Expected time complexity is O(n)
+
+A node x is there in output if x is the topmost node at its horizontal distance. Horizontal distance of left child of a node x is equal to horizontal distance of x minus 1, and that of right child is horizontal distance of x plus 1.
+
+       1
+    /     \
+   2       3
+  /  \    / \
+ 4    5  6   7
+Top view of the above binary tree is
+4 2 1 3 7
+
+        1
+      /   \
+    2       3
+      \   
+        4  
+          \
+            5
+             \
+               6
+Top view of the above binary tree is
+2 1 3 6
+	 */
+	public List<K> getTopView() {
+		List<K> list = new ArrayList<K>();
+		LinkedList<TopViewInfo<K>> queue = new LinkedList<TopViewInfo<K>>();
+		int lowerLevelViewInfo = 1;
+		int upperLevelViewInfo = -1;
+		if(root != null) {
+			queue.addLast(new TopViewInfo<K>(root.data, 0));
+			while(queue.size() > 0) {
+				TopViewInfo<K> removeFirst = queue.removeFirst();
+			}
+		}
+		return list;
+	}
+	
+	public static class TopViewInfo<K> {
+		K data;
+		int viewInfo;
+		
+		public TopViewInfo(K data,int viewInfo) {
+			this.data = data;
+			this.viewInfo = viewInfo;
 		}
 	}
 }
