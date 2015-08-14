@@ -203,7 +203,76 @@ public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends B
 			return root;
 		}
 	}
+	/**
+	 * http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/
+	 * @param preOrder
+	 */
+	public void populateFromPreOrderRec(K[] preOrder) {
+		root = populateFromPreOrder(preOrder,0,preOrder.length-1,null,null).root;
+	}
+	/**
+	 * 
+	 * @param preOrder
+	 * @param start start idx
+	 * @param end end idx
+	 * @param object lower limit
+	 * @param object2 end limit
+	 * @return
+	 */
+	protected PopPreOrderInfo populateFromPreOrder(K[] preOrder, int start, int end,
+			K lower, K higher) {
+		if(start == end) {
+			TreeNode<K> node = new TreeNode<K>(preOrder[start], null, null);
+			if(higher != null) {
+				int compareTo = node.data.compareTo(higher);
+				if(compareTo > 0) {
+					//greater element has come
+					PopPreOrderInfo info = new PopPreOrderInfo();
+					info.root = null;
+					info.idxOfGr8rEleThanRoot = start;
+					return info;
+				}
+			}
+			PopPreOrderInfo info = new PopPreOrderInfo();
+			info.root = node;
+			info.idxOfGr8rEleThanRoot = start + 1;
+			return info;
+		} else if(start < end) {
+			TreeNode<K> node = new TreeNode<K>(preOrder[start], null, null);
+			if(lower != null) {
+				int compareTo = node.data.compareTo(lower);
+				if(compareTo < 0) {
+					//not possible
+					return null;
+				}
+			}
+			if(higher != null) {
+				int compareTo = node.data.compareTo(higher);
+				if(compareTo > 0) {
+					//greater element has come
+					PopPreOrderInfo info = new PopPreOrderInfo();
+					info.root = null;
+					info.idxOfGr8rEleThanRoot = start;
+					return info;
+				}
+			}
+			PopPreOrderInfo leftInfo = populateFromPreOrder(preOrder, start+1, end, lower, preOrder[start]);
+			node.left = leftInfo.root;
+			PopPreOrderInfo rightInfo = populateFromPreOrder(preOrder, leftInfo.idxOfGr8rEleThanRoot,end , preOrder[start], higher);
+			node.right = rightInfo.root;
+			PopPreOrderInfo info = new PopPreOrderInfo();
+			info.root = node;
+			info.idxOfGr8rEleThanRoot = rightInfo.idxOfGr8rEleThanRoot;
+			return info;
+		}
+		return null;
+	}
 	
+	public class PopPreOrderInfo {
+		TreeNode<K> root;
+		int idxOfGr8rEleThanRoot;
+	}
+
 	/**
 	 * http://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversal-set-2/
 	 * Given preorder traversal of a binary search tree, construct the BST.

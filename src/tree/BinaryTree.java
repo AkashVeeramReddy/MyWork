@@ -3,9 +3,11 @@ package tree;
 import java.awt.Desktop;
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.regex.Matcher;
 
+import online.hackerrank.tree.noparent.Node;
 import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
@@ -451,6 +453,20 @@ public class BinaryTree<K> {
 		}
 		return node;
 	}
-	
+	/**
+	 * http://www.geeksforgeeks.org/check-if-a-given-binary-tree-is-complete-tree-or-not/
+	 * Given a Binary Tree, write a function to check whether the given Binary Tree is Complete Binary Tree or not.
+
+		A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled,
+		and all nodes are as far left as possible
+	 * @return
+	 */
+	public boolean isCompleteTree() {
+		if(root == null) {
+			return true;
+		}
+		//do level order
+		return false;
+	}
 	
 }

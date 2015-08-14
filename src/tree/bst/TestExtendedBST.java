@@ -10,6 +10,9 @@ public class TestExtendedBST {
 	 */
 	public static void main(String[] args) {
 		ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
+		tree.populateFromPreOrderRec(new Integer[]{10, 5, 1, 7, 40, 50});
+		tree.showImage();
+		/*ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
 		tree.add(50);
 		tree.add(25);
 		tree.add(75);
@@ -28,14 +31,14 @@ public class TestExtendedBST {
 		tree1.add(60);
 		tree1.add(70);
 		tree1.add(80);
-		tree1.add(75);
+		tree1.add(75);*/
 		//CollectionUtils.addNumbers(ebst);
 		//System.out.println(tree1);
 		//tree.showImage();
 	//	tree1.showImage();
 		
-		List<Integer> sortedOrder = tree.getSortedOrder(tree1);
-		System.out.println(sortedOrder);
+		//List<Integer> sortedOrder = tree.getSortedOrder(tree1);
+		//System.out.println(sortedOrder);
 		//System.out.println(tree1.getLeastCommonAncestor(0, 100));
 		//System.out.println(tree1.getLeastCommonAncestor(0, 30));
 		

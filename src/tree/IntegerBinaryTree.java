@@ -2,6 +2,7 @@ package tree;
 
 import java.io.File;
 
+import online.hackerrank.tree.noparent.Node;
 import list.IList;
 import list.arraylist.MyArrayList;
 import tree.fns.IMakeNode;
@@ -244,6 +245,38 @@ public class IntegerBinaryTree extends BinaryTreeComparable<Integer>
 		root = populateWithSpecialPreorder(preorder, leafInfo, 0).root;
 	}
 	
+	/**
+	 * http://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/
+	 * Two of the nodes of a Binary Search Tree (BST) are swapped. Fix (or correct) the BST.
+
+		Input Tree:
+		         10
+		        /  \
+		       5    8
+		      / \
+		     2   20
+		
+		In the above tree, nodes 20 and 8 must be swapped to fix the tree.  
+		Following is the output tree
+		         10
+		        /  \
+		       5    20
+		      / \
+		     2   8
+	 */
+	public void correctBSTBySwappingTwoNodes() {
+		getIncorrectedNode(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+	
+	protected TreeNode<Integer> getIncorrectedNode(TreeNode<Integer> root,int lower, int higher) {
+		if(root != null) {
+			Integer data = root.data;
+			if(data > lower && data < higher) {
+				TreeNode<Integer> incorrectedNode = getIncorrectedNode(root.left, lower, data);
+			}
+		}
+		return null;
+	}
 	public SpecialPreorderInfo populateWithSpecialPreorder(Integer[] preorder,
 			Boolean[] leafInfo,int idx) {
 		if(idx >= preorder.length) {

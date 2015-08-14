@@ -31,6 +31,18 @@ public class MyUtilities {
 		array[idx2] = temp;
 	}
 	
+	/**
+	 * 
+	 * @param obj1 not null
+	 * @param obj2 not null
+	 * wont work as in java pointers are passed by value
+	 */
+	public static <K> void swap(K obj1, K obj2) {
+		K temp = obj1;
+		obj1 = obj2;
+		obj2 =temp;
+	}
+	
 	public static <K extends Comparable<? super K>> K getMaxElement(K... elements) {
 		return getMaxElementinArray(elements);
 	}

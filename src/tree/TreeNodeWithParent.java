@@ -16,4 +16,8 @@ public class TreeNodeWithParent<K> extends TreeNode<K> {
 		this.parent = parent;
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }
