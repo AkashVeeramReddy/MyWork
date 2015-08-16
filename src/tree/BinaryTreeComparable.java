@@ -1,5 +1,9 @@
 package tree;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
 import utils.MyUtilities;
 
 
@@ -118,7 +122,9 @@ public class BinaryTreeComparable<K extends Comparable<? super K>> extends Binar
 		} else {
 			TreeNode<K> leftRoot = convertToBST(node.left);
 			TreeNode<K> rightRoot = convertToBST(node.right);
-			
+			/**
+			 * traverse tree to get data. Sort them and them populate tree
+			 */
 			K nodeData = node.data;
 			//if()
 		}
@@ -133,4 +139,8 @@ public class BinaryTreeComparable<K extends Comparable<? super K>> extends Binar
 			return sizeWithRoot == maxSize;
 		}
 	}
+	
+	
+	
+	
 }

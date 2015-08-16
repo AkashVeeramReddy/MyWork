@@ -3,6 +3,7 @@ package tree;
 import java.awt.Desktop;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -469,4 +470,88 @@ public class BinaryTree<K> {
 		return false;
 	}
 	
+	/**
+	 * http://www.geeksforgeeks.org/given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation/
+	 * Given Linked List Representation of Complete Binary Tree, construct the Binary tree
+	 * @param list
+	 */
+	public void populateCompleteTreeFromLinkedList(LinkedList<K> list) {
+		LinkedList<TreeNode<K>> queue = new LinkedList<TreeNode<K>>();
+		Iterator<K> listIterator = list.iterator();
+		if(list.isEmpty()) {
+			root = null;
+		}
+		K data = (K) listIterator.next();
+		TreeNode<K> makeNode = makeNode(data);
+		queue.add(makeNode);
+		//stack.push(data);
+		while (!queue.isEmpty()) {
+			TreeNode<K> pop = queue.removeFirst();
+			if(root == null) {
+				root = pop;
+			}
+			if(listIterator.hasNext()) {
+				data = (K) listIterator.next();
+				makeNode = makeNode(data);
+				pop.left = makeNode;
+				queue.add(makeNode);
+			}
+			if(listIterator.hasNext()) {
+				data = (K) listIterator.next();
+				makeNode = makeNode(data);
+				pop.right = makeNode;
+				queue.add(makeNode);
+			}
+			
+		}
+		
+	}
+	/**
+	 * http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/
+	 * iven a Binary Tree (Bt), convert it to a Doubly Linked List(DLL). 
+	 * The left and right pointers in nodes are to be used as previous and next pointers respectively in converted DLL.
+	 *  The order of nodes in DLL must be same as Inorder of the given Binary Tree.
+	 *  The first node of Inorder traversal (left most node in BT) must be head node of the DLL.
+	 */
+	public void convertBinaryTreeToLinkedListInPlace() {
+		if(root != null) {
+			root = convertBinaryTreeToLinkedListInPlace(root).head;
+		}
+	}
+	protected BTtoLLInfo convertBinaryTreeToLinkedListInPlace(TreeNode<K> ptr) {
+		if(ptr != null) {
+			BTtoLLInfo left = null;
+			if(ptr.left != null) {
+				left = convertBinaryTreeToLinkedListInPlace(ptr.left);
+			}
+			BTtoLLInfo right = null;
+			if(ptr.right != null) {
+				right = convertBinaryTreeToLinkedListInPlace(ptr.right);
+			}
+			BTtoLLInfo info = new BTtoLLInfo();
+			if(ptr.left != null) {
+				info.head = left.head;
+				ptr.left = left.tail;
+				
+				left.tail.right = ptr;
+			} else {
+				info.head = ptr;
+			}
+			if(ptr.right != null) {
+				info.tail = right.tail;
+				ptr.right = right.head;
+				
+				right.head.left = ptr;
+			} else {
+				info.tail = ptr;
+			}
+			return info;
+		}
+		return null;
+	}
+	
+	public class BTtoLLInfo {
+		TreeNode<K> head;
+		TreeNode<K> tail;
+	}
 }

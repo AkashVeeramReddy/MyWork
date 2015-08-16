@@ -1,0 +1,32 @@
+digraph DotContents {
+13
+10
+7
+
+10 -> 7[label = "l"]
+right10 [label="null"]
+10 -> right10[label = "r"]
+
+13 -> 10[label = "l"]
+24
+20
+15
+
+20 -> 15[label = "l"]
+right20 [label="null"]
+20 -> right20[label = "r"]
+
+24 -> 20[label = "l"]
+30
+25
+
+30 -> 25[label = "l"]
+36
+
+30 -> 36[label = "r"]
+
+24 -> 30[label = "r"]
+
+13 -> 24[label = "r"]
+
+}
