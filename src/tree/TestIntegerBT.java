@@ -1,6 +1,5 @@
 package tree;
 
-import list.IList;
 
 public class TestIntegerBT {
 
@@ -9,7 +8,9 @@ public class TestIntegerBT {
 	 */
 	public static void main(String[] args) {
 		IntegerBinaryTree tree = new IntegerBinaryTree("med_bst.dot");
-		tree.convertBinaryTreeToLinkedListInPlace();
+		//tree.printAllNodesAtDistance(2, 25);
+		//tree.showImage();
+		//tree.convertBinaryTreeToLinkedListInPlace();
 		System.out.println();
 		//Integer []preOrder = new Integer[]{10, 30, 20, 5, 15};
 		//Boolean []leafInfo = new Boolean[]{false,false,true,true,true};

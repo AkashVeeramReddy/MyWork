@@ -11,7 +11,7 @@ public class TestBinaryTreeComparable {
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		CollectionUtils.addToCollection(list, 10,12,15,25,30,36);
 		System.out.println(list);
-		tree.populateCompleteTreeFromLinkedList(list);
+		//tree.populateCompleteTreeFromLinkedList(list);
 		tree.showImage();
 	}
 }

@@ -2,23 +2,19 @@ package tree;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.regex.Matcher;
 
-import online.hackerrank.tree.noparent.Node;
-import list.IList;
-import list.arraylist.MyArrayList;
-import list.linkedlist.MyLinkedList;
-import queue.IQueue;
 import tree.examples.TreeExamples;
 import utils.FileUtils;
 import utils.MyConstants;
 import utils.PatternUtils;
 import utils.ValidationUtils;
-
+/**
+ * Basic fns in a binary tree
+ * @author user
+ *
+ * @param <K>
+ */
 public class BinaryTree<K> {
 	
 	/*
@@ -51,127 +47,7 @@ public class BinaryTree<K> {
 		return false;
 	}
 	
-	public void mirrorize() {
-		mirrorize(root);
-	}
 	
-	public boolean isMirrorTree() {
-		return isMirrorTree(root.left,root.right);
-	}
-	
-	protected boolean isMirrorTree(TreeNode<K> left, TreeNode<K> right) {
-		if(left == null && right == null) {
-			return true;
-		}
-		if(left != null && right != null) {
-			K leftData = left.data;
-			K rightData = right.data;
-			if(leftData.equals(rightData)) {
-				return isMirrorTree(left.left,right.right) && isMirrorTree(left.right,right.left);
-			}
-		}
-		return false;
-	}
-
-	protected void mirrorize(TreeNode<K> ele) {
-		if(ele != null) {
-			mirrorize(ele.left);
-			mirrorize(ele.right);
-			//MyUtilities.swap(ele.left, ele.right);
-			TreeNode<K> temp = ele.left;
-			ele.left = ele.right;
-			ele.right = temp;
-		}
-	}
-	
-	public IList<K> getLevelOrderTraversal() {
-		IList<K> list = new MyArrayList<K>();
-		populateLevelOrderFor(root,list);
-		return list;
-	}
-	
-	private void populateLevelOrderFor(TreeNode<K> node, IList<K> list) {
-		IQueue<TreeNode<K>> queue = new MyLinkedList<TreeNode<K>>();
-		queue.enqueue(node);
-		TreeNode<K> dequeuedEle = queue.dequeue();
-		while(dequeuedEle != null) {
-			list.add(dequeuedEle.data);
-			if(dequeuedEle.left != null) {
-				queue.enqueue(dequeuedEle.left);
-			}
-			if(dequeuedEle.right != null) {
-				queue.enqueue(dequeuedEle.right);
-			}
-			dequeuedEle = queue.dequeue();
-		}
-	}
-	
-	/**
-	 * print all paths from root to all leaves
-	 */
-	public void printAllPaths() {
-		printAllPaths(root,new StringBuilder());
-	}
-	
-	protected void printAllPaths(TreeNode<K> node,StringBuilder builder) {
-		if(node == null) {
-			System.out.println(builder);
-		} else {
-			builder.append(node.data);
-			//builder.append("->");
-			if(node.left == null && node.right == null) {
-				System.out.println(builder);
-			} else {
-				builder.append("->");
-				if(node.left != null && node.right != null) {
-					printAllPaths(node.left,new StringBuilder(builder));
-					printAllPaths(node.right,new StringBuilder(builder));
-				} else if(node.left == null) {
-					printAllPaths(node.right,builder);
-				} else {
-					//node.right == null
-					printAllPaths(node.left,builder);
-				}
-			}
-			
-		}
-	}
-	
-	public boolean isBalancedTree() {
-		Info info = new Info();
-		return isBalancedTree(root,0,info);
-	}
-	
-	private boolean isBalancedTree(TreeNode<K> root,int currentLevel,Info info) {
-		if(root == null) {
-			return true;
-		}
-		else {
-			currentLevel ++;
-			if(root.isLeaf()) {
-				if(info.minDepthLevel == 0) {
-					info.minDepthLevel = currentLevel;
-					return true;
-				} else {
-					int diff = currentLevel - info.minDepthLevel;
-					if(diff ==0 || diff ==1 || diff==-1) {
-						info.minDepthLevel = Math.min(currentLevel, info.minDepthLevel);
-						return true;
-					}
-					return false;
-						
-				}
-			}
-			else {
-				return isBalancedTree(root.left,currentLevel ,info
-				) && isBalancedTree(root.right,currentLevel,info);
-			}
-		}
-	}
-	
-	class Info {
-		private int minDepthLevel;
-	}
 	
 	public TreeNode<K> makeNode(K element) {
 		return new TreeNode<K>(element, null, null);
@@ -306,252 +182,23 @@ public class BinaryTree<K> {
 		return builder;
 	}
 	
-	public boolean isFoldable() {
-		return isFoldable(root);
+	protected TreeNode<K> getNodeFromData(K data) {
+		return getNodeFromData(root,data);
 	}
 	
-	/**
-	 * http://www.geeksforgeeks.org/foldable-binary-trees/
-	 * Question: Given a binary tree, find out if the tree can be folded or not.
-
-	 * @param root2
-	 * @return
-	 */
-	protected boolean isFoldable(TreeNode<K> root) {
-		if(root == null) {
-			return true;
+	protected TreeNode<K> getNodeFromData(TreeNode<K> node, K data) {
+		if(node == null) {
+			return null;
 		}
-		if(root.left != null && root.right != null) {
-			//mirrorize root's right subtree
-			mirrorize(root.right);
-			return isIdenticalStructure(root.left, root.right);
-		}
-		return false;
-	}
-	
-	protected boolean isIdenticalStructure(TreeNode<K> ptr1,TreeNode<K> ptr2) {
-		if(ptr1 == null && ptr2 == null) {
-			return true;
-		} else if(ptr1 != null && ptr2 != null) {
-			return isIdenticalStructure(ptr1.left, ptr2.left) &&
-					isIdenticalStructure(ptr1.right, ptr2.right);
-		}
-		return false;
-	}
-	
-	/**
-	 * http://www.geeksforgeeks.org/check-if-a-binary-tree-is-subtree-of-another-binary-tree/
-	 * 
-	 * Given two binary trees, check if the first tree is subtree of the second one.
-	 *  A subtree of a tree T is a tree S consisting of a node in T and all of its descendants in T.
-	 *   The subtree corresponding to the root node is the entire tree; 
-	 *   the subtree corresponding to any other node is called a proper subtree.
-	 * @param subTree
-	 * @return - is subTree a sub tree of this tree
-	 */
-	public boolean isSubtree(BinaryTree<K> subTree) {
-		return isSubtree(root, subTree.root);
-	}
-	
-	public boolean isSubtree(TreeNode<K> ptrTree,TreeNode<K> ptrSubTree) {
-		if(ptrTree == null && ptrSubTree == null) {
-			return true;
-		} else if(ptrTree == null || ptrSubTree == null) {
-			return false;
+		if(node.data == data || node.data.equals(data)) {
+			return node;
 		} else {
-			//both not null
-			boolean equals = ValidationUtils.nullSafeEquals(ptrTree.data, ptrSubTree.data);
-			if(equals) {
-				/*
-				 * If data is equal 2 chances can arise
-				 * 1) left subtrees of both are equal and right subtrees of both are equal.
-				 * 2) check for ptrSubTree in left subtree and right sub tree
-				 */
-				return (isEqual(ptrTree.left,ptrSubTree.left) && isEqual(ptrTree.right,ptrSubTree.right))
-						|| (
-							(isSubtree(ptrTree.left,ptrSubTree)) || (isSubtree(ptrTree.right,ptrSubTree))
-							);
-			} else {
-				//check for ptrSubTree in left subtree and right sub tree
-				return isSubtree(ptrTree.left,ptrSubTree) || isSubtree(ptrTree.left,ptrSubTree);
-			}
+			TreeNode<K> left = getNodeFromData(node.left,data);
+			TreeNode<K> right = getNodeFromData(node.right,data);
+			return (left != null) ? left : right;
 		}
 	}
 	
-	/**
-	 * are two trees equal
-	 * @param tree
-	 * @return
-	 */
-	public boolean isEqual(BinaryTree<K> tree) {
-		return isEqual(root,tree.root);
-	}
 	
-	protected boolean isEqual(TreeNode<K> ptr1,TreeNode<K> ptr2) {
-		if(ptr1 == null && ptr2 == null) {
-			return true;
-		} else if(ptr1 != null && ptr2 != null) {
-			return ValidationUtils.nullSafeEquals(ptr1.data, ptr2.data)
-					&& isIdenticalStructure(ptr1.left, ptr2.left) &&
-					isIdenticalStructure(ptr1.right, ptr2.right);
-		}
-		return false;
-	}
 	
-	/**
-	 * http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/
-	 * Given two arrays that represent preorder and postorder traversals of a full binary tree,
-	 *  construct the binary tree.
-
-		A Full Binary Tree is a binary tree where every node has either 0 or 2 children
-		
-	 * tree should be preferably empty
-	 * @param preOrder
-	 * @param postOrder
-	 */
-	public void populateFullTreeFromPreorderPostOrder(K[] preOrder,K[] postOrder) {
-		if(preOrder.length == 0 || postOrder.length == 0)
-			return;
-		Map<K, Integer> preOrderMap = new HashMap<K, Integer>();
-		for (int i = 0; i < preOrder.length; i++) {
-			preOrderMap.put(preOrder[i], i);
-		}
-		Map<K, Integer> postOrderMap = new HashMap<K, Integer>();
-		for (int i = 0; i < postOrder.length; i++) {
-			postOrderMap.put(postOrder[i], i);
-		}
-		root = populateFullTreeFromPreorderPostOrder(preOrder, postOrder, preOrderMap,
-				postOrderMap, 0, postOrder.length - 1);
-	}
-	
-	protected TreeNode<K> populateFullTreeFromPreorderPostOrder(K[] preOrder,K[] postOrder,
-			Map<K, Integer> preOrderIdxInfo, Map<K, Integer> postOrderIdxInfo,
-			int preOrderIdx, int postOrderIdx) {
-		TreeNode<K> node = makeNode(preOrder[preOrderIdx]);
-		boolean hasChild = false;
-		int leftChildIndex = preOrderIdx+1;
-		int rightChildIdx = postOrderIdx-1;
-		if(leftChildIndex == preOrder.length || rightChildIdx < 0) {
-			hasChild = false;
-		} else {
-			K leftChild = preOrder[leftChildIndex];
-			/*
-			 * if left child exists, then left child should occur before the parent
-			 * in post order trvaersal.
-			 */
-			Integer postOrderLeftChildIdx = postOrderIdxInfo.get(leftChild);
-			if(postOrderLeftChildIdx < postOrderIdx) {
-				hasChild = true;
-			} else {
-				hasChild = false;
-			}
-		}
-		if(hasChild) {
-			node.left = populateFullTreeFromPreorderPostOrder(preOrder, postOrder, preOrderIdxInfo,
-					postOrderIdxInfo, leftChildIndex, postOrderIdxInfo.get(preOrder[leftChildIndex]));
-			node.right = populateFullTreeFromPreorderPostOrder(preOrder, postOrder, preOrderIdxInfo,
-					postOrderIdxInfo, preOrderIdxInfo.get(postOrder[rightChildIdx]), rightChildIdx);
-		}
-		return node;
-	}
-	/**
-	 * http://www.geeksforgeeks.org/check-if-a-given-binary-tree-is-complete-tree-or-not/
-	 * Given a Binary Tree, write a function to check whether the given Binary Tree is Complete Binary Tree or not.
-
-		A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled,
-		and all nodes are as far left as possible
-	 * @return
-	 */
-	public boolean isCompleteTree() {
-		if(root == null) {
-			return true;
-		}
-		//do level order
-		return false;
-	}
-	
-	/**
-	 * http://www.geeksforgeeks.org/given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation/
-	 * Given Linked List Representation of Complete Binary Tree, construct the Binary tree
-	 * @param list
-	 */
-	public void populateCompleteTreeFromLinkedList(LinkedList<K> list) {
-		LinkedList<TreeNode<K>> queue = new LinkedList<TreeNode<K>>();
-		Iterator<K> listIterator = list.iterator();
-		if(list.isEmpty()) {
-			root = null;
-		}
-		K data = (K) listIterator.next();
-		TreeNode<K> makeNode = makeNode(data);
-		queue.add(makeNode);
-		//stack.push(data);
-		while (!queue.isEmpty()) {
-			TreeNode<K> pop = queue.removeFirst();
-			if(root == null) {
-				root = pop;
-			}
-			if(listIterator.hasNext()) {
-				data = (K) listIterator.next();
-				makeNode = makeNode(data);
-				pop.left = makeNode;
-				queue.add(makeNode);
-			}
-			if(listIterator.hasNext()) {
-				data = (K) listIterator.next();
-				makeNode = makeNode(data);
-				pop.right = makeNode;
-				queue.add(makeNode);
-			}
-			
-		}
-		
-	}
-	/**
-	 * http://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/
-	 * iven a Binary Tree (Bt), convert it to a Doubly Linked List(DLL). 
-	 * The left and right pointers in nodes are to be used as previous and next pointers respectively in converted DLL.
-	 *  The order of nodes in DLL must be same as Inorder of the given Binary Tree.
-	 *  The first node of Inorder traversal (left most node in BT) must be head node of the DLL.
-	 */
-	public void convertBinaryTreeToLinkedListInPlace() {
-		if(root != null) {
-			root = convertBinaryTreeToLinkedListInPlace(root).head;
-		}
-	}
-	protected BTtoLLInfo convertBinaryTreeToLinkedListInPlace(TreeNode<K> ptr) {
-		if(ptr != null) {
-			BTtoLLInfo left = null;
-			if(ptr.left != null) {
-				left = convertBinaryTreeToLinkedListInPlace(ptr.left);
-			}
-			BTtoLLInfo right = null;
-			if(ptr.right != null) {
-				right = convertBinaryTreeToLinkedListInPlace(ptr.right);
-			}
-			BTtoLLInfo info = new BTtoLLInfo();
-			if(ptr.left != null) {
-				info.head = left.head;
-				ptr.left = left.tail;
-				
-				left.tail.right = ptr;
-			} else {
-				info.head = ptr;
-			}
-			if(ptr.right != null) {
-				info.tail = right.tail;
-				ptr.right = right.head;
-				
-				right.head.left = ptr;
-			} else {
-				info.tail = ptr;
-			}
-			return info;
-		}
-		return null;
-	}
-	
-	public class BTtoLLInfo {
-		TreeNode<K> head;
-		TreeNode<K> tail;
-	}
 }

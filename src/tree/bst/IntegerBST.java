@@ -6,7 +6,7 @@ import tree.TreeNode;
 import tree.fns.IMakeNode;
 import tree.fns.TreePopulate;
 
-public class IntegerBST extends ExtendedBinarySearchTree<Integer> 
+public class IntegerBST extends BinarySearchTree<Integer> 
 	implements IMakeNode<Integer, TreeNode<Integer>> {
 	
 	public IntegerBST() {

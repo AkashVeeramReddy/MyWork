@@ -11,19 +11,25 @@ import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
 import queue.IQueue;
+import tree.BinaryTree;
+import tree.ExtendedBinaryTree;
+import tree.IntegerBinaryTree;
 import tree.TreeNode;
 import utils.MyUtilities;
 import utils.RotationType;
 
 /**
- * normal bst + more fns
+ * For a function, code in {@link BinarySearchTree}. Use some other class like
+ * {@link IntegerBST} to create an object and test its functionality as it extends
+ * {@link BinarySearchTree}.
+ *  If it works move code to {@link ExtendedBinarySearchTree}
  * @author nithin
  *
  * @param <K>
  */
 public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	
-	
+	/*
 	public void mirrorize() {
 		super.mirrorize();
 		switch (treeType) {
@@ -33,7 +39,7 @@ public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends B
 			treeType = INORDER_ASCENDING;
 		}
 	}
-	
+	*/
 	/**
 	 * both are present in the tree
 	 * @param data1
@@ -197,5 +203,62 @@ public class ExtendedBinarySearchTree<K extends Comparable<? super K>> extends B
 	 * @param higher
 	 */
 	public void removeKeysOutsiderange(K lower, K higher) {
+	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/print-bst-keys-in-the-given-range/
+	 * 
+	 * Given two values k1 and k2 (where k1 < k2) and a root pointer to a Binary Search Tree.
+	 *  Print all the keys of tree in range k1 to k2. i.e. print all x such that k1<=x<=k2
+	 *  and x is a key of given BST. Print all the keys in increasing order.
+	 * @param start
+	 * @param end
+	 */
+	public void printElementsInRange(K start,K end) {
+		printElementsInRange(root,start, end);
+	}
+	
+	protected void printElementsInRange(TreeNode<K> ptr, K start, K end) {
+		K data = ptr.data;
+		int cmpStart = data.compareTo(start);
+		int cmpEnd = data.compareTo(end);
+		
+		if(cmpStart >= 0) {
+			printElementsInRange(start, data);
+		}
+		if(cmpStart >= 0 && cmpEnd <= 0) {
+			System.out.println(data);
+		}
+		if(cmpEnd <= 0) {
+			printElementsInRange(data, end);
+		}
+		
+	}
+	
+
+	/**
+	 * http://www.geeksforgeeks.org/sorted-order-printing-of-an-array-that-represents-a-bst/
+	 * 
+	 * Given an array that stores a complete Binary Search Tree, write a function that efficiently prints the given array in ascending order.
+
+		For example, given an array [4, 2, 5, 1, 3], the function should print 1, 2, 3, 4, 5
+	 */
+	public static <K extends Comparable<? super K>> void getSortedOrder(K[] array) {
+		getSortedOrder(array,0);
+	}
+	public static <K extends Comparable<? super K>> void getSortedOrder(K[] array,int start) {
+		if(start > array.length -1) {
+			return;
+		} else if(start == array.length -1) {
+			System.out.println(array[start]);
+			return;
+		} else {
+			//node has children
+			int leftChild = 2*start + 1;
+			getSortedOrder(array,leftChild);
+			System.out.println(array[start]);
+			int rightChild = 2*(start + 1);
+			getSortedOrder(array,rightChild);
+		}
 	}
 }

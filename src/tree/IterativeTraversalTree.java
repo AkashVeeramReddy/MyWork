@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import queue.IQueue;
 import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
@@ -133,4 +134,25 @@ public class IterativeTraversalTree<K> extends BinaryTree<K> {
 		}
 	}
 	
+	public IList<K> getLevelOrderTraversal() {
+		IList<K> list = new MyArrayList<K>();
+		populateLevelOrderFor(root,list);
+		return list;
+	}
+	
+	private void populateLevelOrderFor(TreeNode<K> node, IList<K> list) {
+		IQueue<TreeNode<K>> queue = new MyLinkedList<TreeNode<K>>();
+		queue.enqueue(node);
+		TreeNode<K> dequeuedEle = queue.dequeue();
+		while(dequeuedEle != null) {
+			list.add(dequeuedEle.data);
+			if(dequeuedEle.left != null) {
+				queue.enqueue(dequeuedEle.left);
+			}
+			if(dequeuedEle.right != null) {
+				queue.enqueue(dequeuedEle.right);
+			}
+			dequeuedEle = queue.dequeue();
+		}
+	}
 }

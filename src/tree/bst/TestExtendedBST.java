@@ -10,7 +10,7 @@ public class TestExtendedBST {
 	 */
 	public static void main(String[] args) {
 		ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
-		tree.populateFromPreOrderRec(new Integer[]{10, 5, 1, 7, 40, 50});
+		//tree.populateFromPreOrderRec(new Integer[]{10, 5, 1, 7, 40, 50});
 		tree.showImage();
 		/*ExtendedBinarySearchTree<Integer> tree = new ExtendedBinarySearchTree<Integer>();
 		tree.add(50);

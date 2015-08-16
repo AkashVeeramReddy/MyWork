@@ -1,6 +1,8 @@
 package tree;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class BinaryTreeConstructionFromTraversals<K> extends BinaryTree<K> {
@@ -59,5 +61,42 @@ public class BinaryTreeConstructionFromTraversals<K> extends BinaryTree<K> {
 					postOrderIdxInfo, preOrderIdxInfo.get(postOrder[rightChildIdx]), rightChildIdx);
 		}
 		return node;
+	}
+	
+	/**
+	 * http://www.geeksforgeeks.org/given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation/
+	 * Given Linked List Representation of Complete Binary Tree, construct the Binary tree
+	 * @param list
+	 */
+	public void populateCompleteTreeFromLinkedList(LinkedList<K> list) {
+		LinkedList<TreeNode<K>> queue = new LinkedList<TreeNode<K>>();
+		Iterator<K> listIterator = list.iterator();
+		if(list.isEmpty()) {
+			root = null;
+		}
+		K data = (K) listIterator.next();
+		TreeNode<K> makeNode = makeNode(data);
+		queue.add(makeNode);
+		//stack.push(data);
+		while (!queue.isEmpty()) {
+			TreeNode<K> pop = queue.removeFirst();
+			if(root == null) {
+				root = pop;
+			}
+			if(listIterator.hasNext()) {
+				data = (K) listIterator.next();
+				makeNode = makeNode(data);
+				pop.left = makeNode;
+				queue.add(makeNode);
+			}
+			if(listIterator.hasNext()) {
+				data = (K) listIterator.next();
+				makeNode = makeNode(data);
+				pop.right = makeNode;
+				queue.add(makeNode);
+			}
+			
+		}
+		
 	}
 }
