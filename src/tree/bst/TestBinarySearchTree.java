@@ -7,7 +7,7 @@ public class TestBinarySearchTree {
 	public static void main(String[] args) {
 		
 		Integer[] array = new Integer[] {4, 2, 5, 1, 3};
-		BinarySearchTree.getSortedOrder(array);
+		//BinarySearchTree.getSortedOrder(array);
 		/*BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.add(50);
 		tree.add(25);
