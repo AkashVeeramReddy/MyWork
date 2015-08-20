@@ -85,7 +85,7 @@ public class SumInRange {
 					update(arrayIdx, diff, start, mid, leftSumIdx);
 				} else {
 					//update in right sub tree
-					int rightIdx = getLeftChildIdx(idxOfTree);
+					int rightIdx = getRightChildIdx(idxOfTree);
 					update(arrayIdx, diff, mid+1, end, rightIdx);
 				}
 			}
