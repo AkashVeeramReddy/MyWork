@@ -219,4 +219,11 @@ public class MyUtilities {
 		List<K> asList = Arrays.asList(array);
 		return asList.toString();
 	}
+
+	public static void swapCharArray(char[] array, int idx1, int idx2) {
+		// TODO Auto-generated method stub
+		char temp = array[idx1];
+		array[idx1] = array[idx2];
+		array[idx2] = temp;
+	}
 }

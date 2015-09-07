@@ -42,13 +42,38 @@ public class Stack<K> implements IStack<K>{
 		return builder.toString();
 	}
 	
+	public void reverse() {
+		boolean canPop = canPop();
+		if(canPop) {
+			K pop = pop();
+			reverse();
+			insertAtBottom(pop);
+		}
+	}
+	
+	protected void insertAtBottom(K ele) {
+		boolean canPop = canPop();
+		if(canPop) {
+			K pop = pop();
+			insertAtBottom(ele);
+			push(pop);
+		} else {
+			push(ele);
+		}
+	}
+
+	protected void reverse(StackNode<K> start2) {
+		
+	}
+
 	public static void main(String[] args) {
-		IStack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<Integer>();
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);
-		stack.pop();
-		System.out.println();
+		stack.push(4);
+		stack.reverse();
+		System.out.println(stack);
 	}
 
 	@Override

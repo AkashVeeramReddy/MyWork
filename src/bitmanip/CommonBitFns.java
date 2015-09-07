@@ -7,15 +7,17 @@ public class CommonBitFns {
 		System.out.println(kthBitSetOrNot);
 		kthBitSetOrNot = isKthBitSetOrNot(7, 3);
 		System.out.println(kthBitSetOrNot);*/
-		int num = 7;
+		/*int num = 7;
 		int addOne = addTwoNumber(3, 5);
-		System.out.println(addOne);
+		System.out.println(addOne);*/
 		/*String binaryString = Integer.toBinaryString(num);
 		System.out.println(binaryString);
 		int rev = reverseBits(num);
 		binaryString = Integer.toBinaryString(rev);
 		System.out.println(binaryString);*/
-		
+		//int arr[] = {12, 1, 12, 3, 12, 1, 1, 2, 3, 3};
+		int findUniqueElement = getSquare(3);
+		System.out.println(findUniqueElement);
 	}
 	
 	public static boolean isKthBitSetOrNot(int number, int k) {
@@ -90,7 +92,7 @@ public class CommonBitFns {
 	/**
 	 * http://www.geeksforgeeks.org/add-1-to-a-given-number/
 	 * Write a program to add one to a given number.
-	 *  You are not allowed to use operators like ‘+’, ‘-‘, ‘*’, ‘/’, ‘++’, ‘–‘ …etc.
+	 *  You are not allowed to use operators like â€˜+â€™, â€˜-â€˜, â€˜*â€™, â€˜/â€™, â€˜++â€™, â€˜â€“â€˜ â€¦etc.
 	 * @param no
 	 * @return
 	 */
@@ -124,5 +126,42 @@ public class CommonBitFns {
 			mask = mask << 1;
 		}
 		return sum;
+	}
+	
+	public static int findUniqueElement(int [] array) {
+		int mask = 1;
+		int size = Integer.SIZE;
+		int uniqEle = 0;
+		for (int i = 0; i < size ; i++) {
+			int noOfOnes = 0;
+			for (int ele : array) {
+				
+				int andRes = ele & mask;
+				if(andRes != 0) {
+					noOfOnes++;
+				}
+			}
+			if(noOfOnes % 3 != 0) {
+				uniqEle = uniqEle ^ mask;
+			}
+			mask = mask << 1;
+		}
+		return uniqEle;
+	}
+	
+	public static int getSquare(int num) {
+		int square = 0;
+		int mask = 1;
+		int numItr = num;
+		//i
+		for (int i = 0; i < Integer.SIZE; i++) {
+			int val = num & mask;
+			if(val != 0) {
+				square = square + numItr;
+			}
+			mask = mask << 1;
+			numItr = numItr << 1;
+		}
+		return square;
 	}
 }

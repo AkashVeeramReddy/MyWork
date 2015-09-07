@@ -22,15 +22,17 @@ Output: 13
  */
 public class NumberOfSetBitsTill {
 	public static void main(String[] args) {
-		System.out.println(numberOfSetBitsTill(1));
+		System.out.println(numberOfSetBitsTill(6));
 	}
 	public static int numberOfSetBitsTill(int num) {
 		int itr = 2;
 		int prevItr = 1;
 		int sum = 0;
 		while (num>=prevItr) {
-			sum = sum + ((num + 1)%itr) - prevItr;
-			sum = sum + (num + 1)/2;
+			int noOfEleInLastGrp = (num + 1)%itr;
+			sum = sum + ((noOfEleInLastGrp>prevItr)?(noOfEleInLastGrp - prevItr):0);
+			int noOfGroupsB4Last = (num + 1)/itr;
+			sum = sum + noOfGroupsB4Last*prevItr;
 			prevItr = itr;
 			itr = itr*2;
 		}
