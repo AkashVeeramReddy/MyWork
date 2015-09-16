@@ -10,7 +10,7 @@ import utils.MyUtilities;
  *
  */
 public class KnightsTour {
-	public static int[][] moves = new int [][]{{1,2},{2,1},
+	public static final int[][] MOVES = new int [][]{{1,2},{2,1},
 												{1,-2},{2,-1},
 												{-1,-2},{-2,-1},
 												{-1,2},{-2,1}};
@@ -36,8 +36,8 @@ public class KnightsTour {
 			return true;
 		}
 		int curMovNo = prevMove + 1;
-		for(int i = 0; i< moves.length; i++) {
-			move = moves[i];
+		for(int i = 0; i< MOVES.length; i++) {
+			move = MOVES[i];
 			newRowIdx = rowIdx + move[0];
 			newColIdx = colIdx + move[1];
 			if(isSafe(newRowIdx, newColIdx,array, dim,curMovNo)) {

@@ -3,7 +3,7 @@ package backtracking;
 import utils.MyUtilities;
 
 public class NQueensProblem {
-	public static int [][] MOVES = {
+	public static final int [][] MOVES = {
 		{+1,-1},
 		{+1,+1},
 		{-1,+1},
