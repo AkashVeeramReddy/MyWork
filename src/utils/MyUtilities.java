@@ -226,4 +226,23 @@ public class MyUtilities {
 		array[idx1] = array[idx2];
 		array[idx2] = temp;
 	}
+
+	public static void printIntArrayTill(int[] array, int n) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < n && i<array.length; i++) {
+			builder.append(array[i]);
+			builder.append(",");
+		}
+		System.out.println(builder);
+	}
+	
+	public static void printCharArrayTill(char[] array, int n) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < n && i<array.length; i++) {
+			builder.append(array[i]);
+			builder.append(",");
+		}
+		System.out.println(builder);
+	}
+	
 }

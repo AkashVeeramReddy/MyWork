@@ -1,4 +1,7 @@
 package permutation;
+
+import utils.MyUtilities;
+
 /**
  * http://www.geeksforgeeks.org/generate-all-possible-sorted-arrays-from-alternate-elements-of-two-given-arrays/
  * 
@@ -27,7 +30,7 @@ public class PrintAlternateSorted {
 					if(array1Idx == (array1.length - 1)) {
 						//print[printIdx] = array1[array1Idx];
 						if(printIdx >= 2 && printIdx%2==0)
-							printArrayTill(print, printIdx);
+							MyUtilities.printIntArrayTill(print, printIdx);
 						print[printIdx] = array1[array1Idx];
 						print(array1, array2, print, array1Idx+1, array2Idx, printIdx+1, false, array1[array1Idx]);
 					} else {
@@ -53,14 +56,14 @@ public class PrintAlternateSorted {
 				} else {
 					//ele smaller than lastSeen. So consider next ele in array1
 					if(array1Idx == (array1.length - 1)) {
-						printArrayTill(print, printIdx);
+						MyUtilities.printIntArrayTill(print, printIdx);
 					} else {
 						print(array1, array2, print, array1Idx+1, array2Idx, printIdx, true, lastSeen);
 					}
 				}
 			} else {
 				if(printIdx >= 2 && printIdx%2==0)
-					printArrayTill(print, printIdx);
+					MyUtilities.printIntArrayTill(print, printIdx);
 			}
 		} else {
 			if(array2Idx < array2.length) {
@@ -74,7 +77,7 @@ public class PrintAlternateSorted {
 						print(array1, array2, print, array1Idx, array2Idx+1, printIdx, false, lastSeen);
 					} else {
 						if(printIdx >= 2 && printIdx%2==0)
-							printArrayTill(print, printIdx);
+							MyUtilities.printIntArrayTill(print, printIdx);
 					}
 					
 				} else {
@@ -88,14 +91,5 @@ public class PrintAlternateSorted {
 			
 			
 		}
-	}
-	
-	public static void printArrayTill(int[] array, int n) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < n && i<array.length; i++) {
-			builder.append(array[i]);
-			builder.append(",");
-		}
-		System.out.println(builder);
 	}
 }

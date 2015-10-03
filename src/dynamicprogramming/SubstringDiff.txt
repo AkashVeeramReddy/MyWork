@@ -1,0 +1,4 @@
+32
+tabriz torino
+0 abacba abcaba
+3 helloworld yellomarin
