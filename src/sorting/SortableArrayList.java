@@ -1,7 +1,7 @@
 package sorting;
 
 import list.arraylist.MyArrayList;
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class SortableArrayList<K extends Comparable<? super K>> extends MyArrayList<K> {
 	
@@ -14,7 +14,7 @@ public class SortableArrayList<K extends Comparable<? super K>> extends MyArrayL
 				K currentElement = (K) data[j];
 				K prevElement = (K) data[j-1];
 				if(currentElement.compareTo(prevElement) == -1) {
-					MyUtilities.swap(data, j, j-1);
+					ArrayUtilities.swapInArray(data, j, j-1);
 				} else {
 					break;
 				}

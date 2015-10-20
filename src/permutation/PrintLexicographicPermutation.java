@@ -3,7 +3,7 @@ package permutation;
 import java.util.Arrays;
 
 import sun.security.util.Length;
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * http://www.geeksforgeeks.org/lexicographic-permutations-of-string/
@@ -38,7 +38,7 @@ public class PrintLexicographicPermutation {
 			System.out.println(Arrays.toString(printArray));
 		} else {
 			for (int i = idx; i < printArray.length; i++) {
-				MyUtilities.swapCharArray(printArray, idx, i);
+				ArrayUtilities.swapCharArray(printArray, idx, i);
 				printLexicographicPermutation(charArray,printArray,idx+1);
 				//we can reverse the array from [idx+1,length)
 				Arrays.sort(printArray, idx+1, printArray.length);

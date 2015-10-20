@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Given a sequence of matrices, find the most efficient way to multiply these matrices together. The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications.
@@ -42,12 +42,12 @@ public class OptimalMatrixMultiplication {
 	public static void matrixMultiplication(int rowMatrix1,int colMatrix1OrRowMatrix2,int colMatrix2) {
 		Integer array1[][] = new Integer[rowMatrix1][colMatrix1OrRowMatrix2];
 		Integer array2[][] = new Integer[colMatrix1OrRowMatrix2][colMatrix2];
-		MyUtilities.populateIntegerArrayWithRandomNos(array1);
-		MyUtilities.populateIntegerArrayWithRandomNos(array2);
+		ArrayUtilities.populateIntegerArrayWithRandomNos(array1);
+		ArrayUtilities.populateIntegerArrayWithRandomNos(array2);
 		System.out.println("========================Array 1==========================");
-		MyUtilities.printDoubleDimensionalArray(array1, 5);
+		ArrayUtilities.printDoubleDimensionalArray(array1, 5);
 		System.out.println("========================Array 2==========================");
-		MyUtilities.printDoubleDimensionalArray(array2, 5);
+		ArrayUtilities.printDoubleDimensionalArray(array2, 5);
 		
 		Integer [][] multipliedArray = new Integer[rowMatrix1][colMatrix2];
 		for(int i=0;i<rowMatrix1;i++) {
@@ -60,15 +60,15 @@ public class OptimalMatrixMultiplication {
 			}
 		}
 		System.out.println("========================Multiplied Array==========================");
-		MyUtilities.printDoubleDimensionalArray(multipliedArray, 5);
+		ArrayUtilities.printDoubleDimensionalArray(multipliedArray, 5);
 	}
 	
 	public static void printOptimalMatrixMultiplication(int noOfMatrices) {
 		System.out.println("No of matrices "+noOfMatrices);
 		Integer [] rowColumnInfo = new Integer[noOfMatrices+1];
-		MyUtilities.populateIntegerArrayWithRandomNos(rowColumnInfo);
+		ArrayUtilities.populateIntegerArrayWithRandomNos(rowColumnInfo);
 		System.out.println("========================Row Column Matrix==========================");
-		MyUtilities.printSingleDimensionArray(rowColumnInfo);
+		ArrayUtilities.printSingleDimensionArray(rowColumnInfo);
 		System.out.println("========================Row Column Info=============================");
 		for(int i = 0;i<noOfMatrices;i++) {
 			System.out.println("Matrix "+i+" rows:" + rowColumnInfo[i] + " columns:"+rowColumnInfo[i+1]);
@@ -117,7 +117,7 @@ public class OptimalMatrixMultiplication {
 			}
 		}
 		System.out.println("========================Cost Info==========================");
-		MyUtilities.printDoubleDimensionalArrayNeatly(infoArray, 15);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(infoArray, 15);
 		System.out.println();
 		printOptimalMatrix(infoArray,0,noOfMatrices-1);
 	}

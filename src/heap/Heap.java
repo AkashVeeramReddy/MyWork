@@ -1,6 +1,6 @@
 package heap;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public abstract class Heap<K extends Comparable<? super K>> {
 	
@@ -37,7 +37,7 @@ public abstract class Heap<K extends Comparable<? super K>> {
 			return null;
 		else {
 			Object object = data[0];
-			MyUtilities.swap(data, 0, size - 1);
+			ArrayUtilities.swapInArray(data, 0, size - 1);
 			size = size - 1;
 			data[size] = null;
 			heapify(0);
@@ -51,7 +51,7 @@ public abstract class Heap<K extends Comparable<? super K>> {
 	 */
 	public void doHeapSort() {
 		for(int i=size;i>1;i--) {
-			MyUtilities.swap(data, 0, size - 1);
+			ArrayUtilities.swapInArray(data, 0, size - 1);
 			size = size - 1;
 			heapify(0);
 		}
@@ -93,6 +93,6 @@ public abstract class Heap<K extends Comparable<? super K>> {
 	
 	@Override
 	public String toString() {
-		return MyUtilities.getStringRepOfArray(data);
+		return ArrayUtilities.getStringRepOfArray(data);
 	}
 }

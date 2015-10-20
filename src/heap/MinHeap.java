@@ -1,6 +1,6 @@
 package heap;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class MinHeap<K extends Comparable<? super K>> extends Heap<K>{
 	
@@ -20,7 +20,7 @@ public class MinHeap<K extends Comparable<? super K>> extends Heap<K>{
 	protected void minHeapify(int idx) {
 		int maxIndexAmongItselfAndChildren = getMinIndexAmongItselfAndChildren(idx);
 		if(maxIndexAmongItselfAndChildren != idx) {
-			MyUtilities.swap(data, idx, maxIndexAmongItselfAndChildren);
+			ArrayUtilities.swapInArray(data, idx, maxIndexAmongItselfAndChildren);
 			minHeapify(maxIndexAmongItselfAndChildren);
 		}
 	}
@@ -29,7 +29,7 @@ public class MinHeap<K extends Comparable<? super K>> extends Heap<K>{
 	protected void bubbleUp(int idx) {
 		int parentIndex = getParentIndex(idx);
 		while(parentIndex >= 0 && (((K) data[idx]).compareTo((K) data[parentIndex]) < 0)) {
-			MyUtilities.swap(data, parentIndex, idx);
+			ArrayUtilities.swapInArray(data, parentIndex, idx);
 			idx = parentIndex;
 			parentIndex = getParentIndex(parentIndex);
 		}

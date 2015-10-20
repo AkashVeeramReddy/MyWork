@@ -1,6 +1,6 @@
 package backtracking;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * http://www.geeksforgeeks.org/backttracking-set-2-rat-in-a-maze/
@@ -33,7 +33,7 @@ public class RatInAMaze {
 		movement[0][0] = 0;
 		boolean ratInMaze =  ratInMaze(0, 0, movement, maze, dim);
 		if(ratInMaze) {
-			MyUtilities.printDoubleDimensionalArrayNeatly(movement, 5);
+			ArrayUtilities.printDoubleDimensionalArrayNeatly(movement, 5);
 		}
 		return ratInMaze;
 	}

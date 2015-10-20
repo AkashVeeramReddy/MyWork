@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Length of the longest continous substring without repeating characters
@@ -83,7 +83,7 @@ public class LongestContinousSubStringWithoutRepeatingChar {
 			}
 		}
 		System.out.println("==============================Info Array=====================================");
-		MyUtilities.printDoubleDimensionalArrayNeatly(infoArray, 20);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(infoArray, 20);
 		Info info = infoArray[0][length-1];
 		System.out.println("The longest continous non repeating substring is "+string.substring(info.startIndex, info.endIndex+1));
 	}

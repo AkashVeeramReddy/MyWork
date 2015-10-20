@@ -1,6 +1,6 @@
 package backtracking;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class NQueensProblem {
 	public static final int [][] MOVES = {
@@ -25,7 +25,7 @@ public class NQueensProblem {
 		//null means no queen's influence present, else queens influence present
 		int[][] influence = new int[dim][dim];
 		solveNQueens(pos,influence, dim, dim);
-		MyUtilities.printDoubleDimensionalArray(pos, 5);
+		ArrayUtilities.printDoubleDimensionalArray(pos, 5);
 		/*
 		int [] rowInfo = new int[dim];
 		int [] colInfo = new int[dim];

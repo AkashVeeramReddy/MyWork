@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * 
@@ -16,7 +16,7 @@ public class MinimizeCutOfWood {
 	
 	public static void mimimizeCutOfWood(Integer[] points) {
 		System.out.println("=============Points Array=================");
-		MyUtilities.printSingleDimensionArray(points);
+		ArrayUtilities.printSingleDimensionArray(points);
 		Info[][] infoArray = new Info[points.length][points.length];
 		Info infoLengthItr = null;
 		for(int i=0;i<points.length-1;i++) {
@@ -47,7 +47,7 @@ public class MinimizeCutOfWood {
 			}
 			
 		}
-		MyUtilities.printDoubleDimensionalArrayNeatly(infoArray, 15);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(infoArray, 15);
 		System.out.println();
 		System.out.println("The minimum cost of cutting wood is "+infoArray[0][points.length -1].cost);
 		System.out.println("Cut the wood as follows");

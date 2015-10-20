@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  *  http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/
@@ -22,7 +22,7 @@ public class LongestIncreasingSequence {
 			intArray[i] = (int) Math.ceil(Math.random() * 100);
 		}
 		System.out.println("======================Integer Array================================");
-		MyUtilities.printSingleDimensionArray(intArray);
+		ArrayUtilities.printSingleDimensionArray(intArray);
 		Info [][] infoArray = new Info [length][length];
 		for(int i =0;i<length;i++) {
 			Info info = new Info();
@@ -130,7 +130,7 @@ public class LongestIncreasingSequence {
 			}
 		}
 		System.out.println("======================Info Array================================");
-		MyUtilities.printDoubleDimensionalArrayNeatly(infoArray, 30);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(infoArray, 30);
 		System.out.println("The longest sub sequence is ");
 		printInfoArray(infoArray,0,length-1,intArray);
 	}

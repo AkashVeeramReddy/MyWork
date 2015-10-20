@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * 
@@ -59,7 +59,7 @@ public class LongestPalindromicSubSequence {
 			}
 		}
 		System.out.println("======================Info Array================================");
-		MyUtilities.printDoubleDimensionalArray(infoArray, 15);
+		ArrayUtilities.printDoubleDimensionalArray(infoArray, 15);
 		
 		System.out.println("The longest palindromic sequence  of " +string+" is ");
 		printPalindromicSequence(infoArray,string,0,length -1);

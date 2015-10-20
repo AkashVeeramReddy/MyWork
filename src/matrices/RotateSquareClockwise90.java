@@ -1,6 +1,6 @@
 package matrices;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * You are given an n x n 2D matrix representing an image.
@@ -19,10 +19,10 @@ public class RotateSquareClockwise90 {
 			    {5,  6,  7,  8},
 			    {9,  10, 11, 12},
 				{13, 14, 15, 16}  };
-		MyUtilities.printDoubleDimensionalArray(matrix, 4);
+		ArrayUtilities.printDoubleDimensionalArray(matrix, 4);
 		rotateSquareMatrixClockwise90Recursive(matrix);
 		System.out.println();
-		MyUtilities.printDoubleDimensionalArray(matrix, 4);
+		ArrayUtilities.printDoubleDimensionalArray(matrix, 4);
 	}
 
 	private static void rotateSquareMatrixClockwise90Recursive(

@@ -4,8 +4,8 @@ import list.IList;
 import list.arraylist.MyArrayList;
 import list.linkedlist.MyLinkedList;
 import queue.IQueue;
+import tree.RotationType;
 import tree.TreeNode;
-import utils.RotationType;
 
 public class SiblingBinarySearchTree<K extends Comparable<? super K>> extends BinarySearchTree<K> {
 	

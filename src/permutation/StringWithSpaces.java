@@ -1,8 +1,6 @@
 package permutation;
 
-import java.util.Arrays;
-
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * http://www.geeksforgeeks.org/print-possible-strings-can-made-placing-spaces/
@@ -29,7 +27,7 @@ public class StringWithSpaces {
 	private static void printWithSpaces(char[] charArray, char[] printArray,
 			int fromIdx,int printArrayItr) {
 		if(fromIdx == charArray.length) {
-			MyUtilities.printCharArrayTill(printArray, printArrayItr);
+			ArrayUtilities.printCharArrayTill(printArray, printArrayItr);
 		} else {
 			printArray[printArrayItr] = charArray[fromIdx];
 			printWithSpaces(charArray, printArray, fromIdx+1, printArrayItr+1);

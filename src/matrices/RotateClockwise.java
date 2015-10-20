@@ -1,6 +1,6 @@
 package matrices;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Given a matrix, clockwise rotate elements in it.
@@ -38,7 +38,7 @@ public class RotateClockwise {
 			    {9,  10, 11, 12},
 				{13, 14, 15, 16}  };
 		rotateSquareMatrixClockwise(matrix);
-		MyUtilities.printDoubleDimensionalArray(matrix, 4);
+		ArrayUtilities.printDoubleDimensionalArray(matrix, 4);
 	}
 	
 	public static void rotateSquareMatrixClockwise(Integer [][]matrix) {

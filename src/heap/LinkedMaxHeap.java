@@ -1,7 +1,7 @@
 package heap;
 
 import stack.IStack;
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class LinkedMaxHeap<K extends Comparable<? super K>> implements IStack<K> {
 	
@@ -37,14 +37,14 @@ public class LinkedMaxHeap<K extends Comparable<? super K>> implements IStack<K>
 	private void maxHeapify(int idx) {
 		int maxIndexAmongItselfAndChildren = getMaxIndexAmongItselfAndChildren(idx);
 		if(maxIndexAmongItselfAndChildren != idx) {
-			MyUtilities.swap(data, idx, maxIndexAmongItselfAndChildren);
+			ArrayUtilities.swapInArray(data, idx, maxIndexAmongItselfAndChildren);
 			maxHeapify(maxIndexAmongItselfAndChildren);
 		}
 	}
 	
 	public void doHeapSort() {
 		for(int i=size;i>1;i--) {
-			MyUtilities.swap(data, 0, size - 1);
+			ArrayUtilities.swapInArray(data, 0, size - 1);
 			size = size - 1;
 			maxHeapify(0);
 		}
@@ -106,7 +106,7 @@ public class LinkedMaxHeap<K extends Comparable<? super K>> implements IStack<K>
 			return null;
 		else {
 			Entry<K> object = (Entry<K>) data[0];
-			MyUtilities.swap(data, 0, size - 1);
+			ArrayUtilities.swapInArray(data, 0, size - 1);
 			size = size - 1;
 			data[size] = null;
 			maxHeapify(0);

@@ -114,4 +114,32 @@ public class Trie {
 		}
 		return strings;
 	}
+	/**
+	 * Returns if there is any word in the trie that starts with the given prefix.
+	 * @param str
+	 * @return
+	 */
+	public boolean prefix(String str) {
+		return prefix(str.toCharArray());
+	}
+
+	public boolean prefix(char[] charArray) {
+		return prefix(root,charArray,0);
+	}
+
+	public boolean prefix(TrieNode ptr, char[] charArray, int idx) {
+		if(ptr != null && idx < charArray.length) {
+			TrieNode childrenByChar = ptr.getChildrenByChar(charArray[idx]);
+			if(childrenByChar != null) {
+				if(idx == charArray.length - 1) {
+					return true;
+				} else {
+					return prefix(childrenByChar, charArray, idx+1);
+				}
+			} else {
+				return false;
+			}
+		}
+		return false;
+	}
 }

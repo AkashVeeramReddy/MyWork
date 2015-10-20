@@ -1,6 +1,6 @@
 package heap;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class MaxHeap<K extends Comparable<? super K>> extends Heap<K>{
 	/*
@@ -34,7 +34,7 @@ public class MaxHeap<K extends Comparable<? super K>> extends Heap<K>{
 	protected void maxHeapify(int idx) {
 		int maxIndexAmongItselfAndChildren = getMaxIndexAmongItselfAndChildren(idx);
 		if(maxIndexAmongItselfAndChildren != idx) {
-			MyUtilities.swap(data, idx, maxIndexAmongItselfAndChildren);
+			ArrayUtilities.swapInArray(data, idx, maxIndexAmongItselfAndChildren);
 			maxHeapify(maxIndexAmongItselfAndChildren);
 		}
 	}
@@ -153,7 +153,7 @@ public class MaxHeap<K extends Comparable<? super K>> extends Heap<K>{
 	protected void bubbleUp(int idx) {
 		int parentIndex = getParentIndex(idx);
 		while(parentIndex >= 0 && (((K) data[idx]).compareTo((K) data[parentIndex]) > 0)) {
-			MyUtilities.swap(data, parentIndex, idx);
+			ArrayUtilities.swapInArray(data, parentIndex, idx);
 			idx = parentIndex;
 			parentIndex = getParentIndex(parentIndex);
 		}

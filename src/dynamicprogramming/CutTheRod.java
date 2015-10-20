@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Given a rod of length n inches and an array of prices that contains prices
@@ -32,7 +32,7 @@ public class CutTheRod {
 			priceArray[i] = (int) Math.ceil((Math.random() * 10)*(i + 1));
 		}
 		System.out.println("======================Price Array================================");
-		MyUtilities.printSingleDimensionArray(priceArray);
+		ArrayUtilities.printSingleDimensionArray(priceArray);
 		Info [] infoArray = new Info[lengthOfTheRod];
 		Info firstInfo = new Info();
 		firstInfo.totalCost = priceArray[0];
@@ -66,7 +66,7 @@ public class CutTheRod {
 			info.optimalCut = optimalCut;
 		}
 		System.out.println("======================Optimal Cost Array================================");
-		MyUtilities.printSingleDimensionArray(infoArray);
+		ArrayUtilities.printSingleDimensionArray(infoArray);
 		
 		System.out.println("===================Cut the rod as follows=================================");
 		printOptimalCost(infoArray,lengthOfTheRod);

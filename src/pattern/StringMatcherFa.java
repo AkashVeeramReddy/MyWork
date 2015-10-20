@@ -1,6 +1,6 @@
 package pattern;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class StringMatcherFa {
 	private static final int NO_OF_ALPHABETS = 3;
@@ -72,6 +72,6 @@ public class StringMatcherFa {
 	}
 	
 	public void printFA() {
-		MyUtilities.printDoubleDimensionalArray(fa, 5);
+		ArrayUtilities.printDoubleDimensionalArray(fa, 5);
 	}
 }

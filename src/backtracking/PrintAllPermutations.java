@@ -1,6 +1,6 @@
 package backtracking;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
@@ -32,9 +32,9 @@ public class PrintAllPermutations {
 		} else {
 			for (int j = i; j < charArray.length; j++) {
 				print[i] = charArray[j];
-				MyUtilities.swapCharArray(charArray, i, j);
+				ArrayUtilities.swapCharArray(charArray, i, j);
 				printAllPermuatations(charArray, print, i+1);
-				MyUtilities.swapCharArray(charArray, i, j);
+				ArrayUtilities.swapCharArray(charArray, i, j);
 			}
 		}
 	}

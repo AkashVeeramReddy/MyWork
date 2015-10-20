@@ -1,6 +1,6 @@
 package list.arraylist;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 public class Sorting {
 	public  static <K extends Comparable<? super K>>  void quickSort(K [] array,int b,int e) {
@@ -22,11 +22,11 @@ public class Sorting {
 				part2++;
 			} else {
 				part1++;
-				MyUtilities.swap(array, itr, part1-1);
+				ArrayUtilities.swapInArray(array, itr, part1-1);
 				part2++;
 			}
 		}
-		MyUtilities.swap(array, e, part1);
+		ArrayUtilities.swapInArray(array, e, part1);
 		return part1;
 	}
 	

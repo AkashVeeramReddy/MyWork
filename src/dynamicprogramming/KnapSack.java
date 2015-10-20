@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Given weights and values of n items, put these items in a knapsack of capacity W
@@ -57,9 +57,9 @@ public class KnapSack {
 			}
 		}
 		System.out.println("========The Weight Array is===========");
-		MyUtilities.printSingleDimensionArray(weightArray);
+		ArrayUtilities.printSingleDimensionArray(weightArray);
 		System.out.println("========The Value Array is===========");
-		MyUtilities.printSingleDimensionArray(valueArray);
+		ArrayUtilities.printSingleDimensionArray(valueArray);
 //		System.out.println("===============Cost Array=========================");
 //		MyUtilities.printDoubleDimensionalArrayNeatly(costArray, 15);
 		System.out.println("Maximum cost is "+costArray[weightArray.length][totalWeight].cost);

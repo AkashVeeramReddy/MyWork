@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Continuing further on dynamic programming series, edit distance is an interesting algorithm.
@@ -77,7 +77,7 @@ public class EditDistance {
 			}
 		}
 		System.out.println("=======================Info Array=============================");
-		MyUtilities.printDoubleDimensionalArrayNeatly(infoArray, 15);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(infoArray, 15);
 		System.out.println();
 		System.out.println("Edit Distance is "+infoArray[sourceLength][targetLength].editDistance);
 		printEditDistance(source, target,infoArray,sourceLength,targetLength);

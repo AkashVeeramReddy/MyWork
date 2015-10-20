@@ -2,6 +2,7 @@ package arrays;
 
 import java.util.Arrays;
 
+import utils.ArrayUtilities;
 import utils.MyUtilities;
 
 public class ArrayPrograms {
@@ -33,7 +34,7 @@ public class ArrayPrograms {
 				evenIdx++;
 				oddIdx --;
 			} else if(!isNoAtEvenIdxEven && !isNoAtOddIdxOdd) {
-				MyUtilities.swap(array, evenIdx, oddIdx);
+				ArrayUtilities.swapInArray(array, evenIdx, oddIdx);
 				evenIdx++;
 				oddIdx --;
 			} else {
@@ -63,14 +64,14 @@ public class ArrayPrograms {
 		while(itr > leftZeroIdx) {
 			switch (array[itr]) {
 			case 0:
-				MyUtilities.swap(array, leftZeroIdx, itr);
+				ArrayUtilities.swapInArray(array, leftZeroIdx, itr);
 				leftZeroIdx++;
 				break;
 			case 1:
 				itr--;
 				break;
 			case 2:
-				MyUtilities.swap(array, rightTwoIdx, itr);
+				ArrayUtilities.swapInArray(array, rightTwoIdx, itr);
 				rightTwoIdx--;
 				itr--;
 				break;
@@ -92,7 +93,7 @@ public class ArrayPrograms {
 	public static void shuffleArray(Integer[] array,int startFirstArray,int endFirstArray,
 			int startSecondArray,int endSecondArray) {
 		//swap a2,b1
-		MyUtilities.swap(array, startFirstArray+1, startSecondArray);
+		ArrayUtilities.swapInArray(array, startFirstArray+1, startSecondArray);
 		
 		shuffleArray(array, startFirstArray+2, endFirstArray, startSecondArray+2, endSecondArray);
 		//now put a2b2 in its correct place
@@ -213,8 +214,8 @@ There may be more than one subarrays with sum as the given sum. The following so
 		Integer []array1 = new Integer[]{1,7,4,9};
 		Integer []array2 = new Integer[]{3,6,8,5};
 		//MyUtilities.populateIntegerArrayWithRandomNos(array,3);
-		MyUtilities.printSingleDimensionArray(array1);
-		MyUtilities.printSingleDimensionArray(array2);
+		ArrayUtilities.printSingleDimensionArray(array1);
+		ArrayUtilities.printSingleDimensionArray(array2);
 		boolean isSum = isSumOfTwoElementsInTwoArraysEqualsK(array1, array2, 11);
 		System.out.println(isSum);
 	}

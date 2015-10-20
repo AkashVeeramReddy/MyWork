@@ -1,6 +1,6 @@
 package backtracking;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * http://www.geeksforgeeks.org/backtracking-set-1-the-knights-tour-problem/
@@ -23,7 +23,7 @@ public class KnightsTour {
 		array[rowIdx][colIdx] = 1;
 		boolean success = knightsTourAt(array, rowIdx, colIdx,dim);
 		//if(success) {
-			MyUtilities.printDoubleDimensionalArrayNeatly(array, 6);
+			ArrayUtilities.printDoubleDimensionalArrayNeatly(array, 6);
 		//}
 		return success;
 	}
@@ -50,7 +50,7 @@ public class KnightsTour {
 					array[newRowIdx][newColIdx] = null;
 					System.out.println("=================================");
 					System.out.println(curMovNo);
-					MyUtilities.printDoubleDimensionalArrayNeatly(array, 6);
+					ArrayUtilities.printDoubleDimensionalArrayNeatly(array, 6);
 					System.out.println("=================================");
 				}
 			}

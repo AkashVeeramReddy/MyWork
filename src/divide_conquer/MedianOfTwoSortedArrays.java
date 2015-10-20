@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import utils.ArrayUtilities;
 import utils.MyUtilities;
 /**
  * TODO
@@ -16,12 +17,12 @@ public class MedianOfTwoSortedArrays {
 	public static void main(String[] args) {
 		Integer array1[] = new Integer[4];
 		Integer array2[] = new Integer[5];
-		MyUtilities.populateIntegerArrayWithRandomNos(array1);
-		MyUtilities.populateIntegerArrayWithRandomNos(array2);
+		ArrayUtilities.populateIntegerArrayWithRandomNos(array1);
+		ArrayUtilities.populateIntegerArrayWithRandomNos(array2);
 		Arrays.sort(array1);
 		Arrays.sort(array2);
-		MyUtilities.printSingleDimensionArray(array1);
-		MyUtilities.printSingleDimensionArray(array2);
+		ArrayUtilities.printSingleDimensionArray(array1);
+		ArrayUtilities.printSingleDimensionArray(array2);
 		System.out.println(getMedianofTwoSortedArrays(array1, array2));
 
 	}

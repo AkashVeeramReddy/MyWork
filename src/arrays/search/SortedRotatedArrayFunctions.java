@@ -46,30 +46,30 @@ public class SortedRotatedArrayFunctions {
 		System.out.println();
 		
 		System.out.println("Find Max Element");
-		Integer maxEle = getMaxElement(noRotation);
+		Integer maxEle = getMaxElementInSortedRotatedArray(noRotation);
 		System.out.println(maxEle);
-		maxEle = getMaxElement(lessRotation);
+		maxEle = getMaxElementInSortedRotatedArray(lessRotation);
 		System.out.println(maxEle);
-		maxEle = getMaxElement(moreRotation);
+		maxEle = getMaxElementInSortedRotatedArray(moreRotation);
 		System.out.println(maxEle);
 		System.out.println();
 		
 		System.out.println("Find Min Element");
-		Integer minEle = getMinElement(noRotation);
+		Integer minEle = getMinElementInSortedRotatedArray(noRotation);
 		System.out.println(minEle);
-		minEle = getMinElement(lessRotation);
+		minEle = getMinElementInSortedRotatedArray(lessRotation);
 		System.out.println(minEle);
-		minEle = getMinElement(moreRotation);
+		minEle = getMinElementInSortedRotatedArray(moreRotation);
 		System.out.println(minEle);
 		
 		System.out.println("Search in less rotated array "+Arrays.toString(lessRotation));
 		for (int i = 0; i <=7; i++) {
-			System.out.println("Ele "+i+ " occurs at idx "+getIdxOfElement(lessRotation, i));
+			System.out.println("Ele "+i+ " occurs at idx "+getIdxOfElementInSortedRotatedArray(lessRotation, i));
 		}
 		
 		System.out.println("Search in more rotated array "+Arrays.toString(moreRotation));
 		for (int i = 0; i <=7; i++) {
-			System.out.println("Ele "+i+ " occurs at idx "+getIdxOfElement(moreRotation, i));
+			System.out.println("Ele "+i+ " occurs at idx "+getIdxOfElementInSortedRotatedArray(moreRotation, i));
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class SortedRotatedArrayFunctions {
 		return arr[0] > arr[arr.length-1];
 	}
 	
-	public static Integer getMaxElement(Integer []arr) {
+	public static Integer getMaxElementInSortedRotatedArray(Integer []arr) {
 		boolean sortedArrayRotated = isSortedArrayRotated(arr);
 		if(!sortedArrayRotated) {
 			return arr[arr.length-1];
@@ -110,7 +110,7 @@ public class SortedRotatedArrayFunctions {
 		return Integer.MIN_VALUE;
 	}
 	
-	public static Integer getMinElement(Integer []arr) {
+	public static Integer getMinElementInSortedRotatedArray(Integer []arr) {
 		boolean sortedArrayRotated = isSortedArrayRotated(arr);
 		if(!sortedArrayRotated) {
 			return arr[0];
@@ -155,7 +155,7 @@ public class SortedRotatedArrayFunctions {
 	 * @param eleToFind
 	 * @return index if it occurs else -1
 	 */
-	public static int getIdxOfElement(Integer[] arr, int eleToFind) {
+	public static int getIdxOfElementInSortedRotatedArray(Integer[] arr, int eleToFind) {
 		if(!isSortedArrayRotated(arr)) {
 			return Arrays.binarySearch(arr, eleToFind);
 		} else {

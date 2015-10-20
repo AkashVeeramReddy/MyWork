@@ -18,7 +18,19 @@ public class KMPStringMatcher {
 	 *  pat[0..4] = text[0..4] and pat[5] != text[5]. So our next check should be
 	 *  between text[5] and pat[transitionArr[4] + 1] 
 	 */
-	
+	/**
+	 * In cormen array indices start with 1
+	 * From cormen: P[1..q] has matched T[s+1..s+q](s is our shift) and P[q+1] != T[s+q+1]
+	 * So what is is our next potential valid shift. next shift is 
+	 * s + q - #(q)
+	 * where #(q) = length of longest proper prefix() of q which is a suffix of q
+	 * 
+	 * Quoting cormen
+	 * We formalize the precomputation required as follows. Given a pattern P[1  m], the prefix
+function for the pattern P is the function π : {1, 2, . . . , m} → {0, 1, . . . , m - 1} such that
+π[q] = max {k : k < q and Pk ⊐ Pq}.
+That is, π[q] is the length of the longest prefix of P that is a proper suffix of Pq.
+	 */
 	protected final int[] transitionArr;
 	
 	public KMPStringMatcher(String pattern) {

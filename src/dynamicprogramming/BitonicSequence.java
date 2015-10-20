@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Given an array arr[0 ... n-1] containing n positive integers, a subsequence of arr[] is called Bitonic
@@ -30,7 +30,7 @@ public class BitonicSequence {
 			intArray[i] = (int) Math.ceil(Math.random() * 100);
 		}
 		System.out.println("======================Integer Array================================");
-		MyUtilities.printSingleDimensionArray(intArray);
+		ArrayUtilities.printSingleDimensionArray(intArray);
 	}
 	
 	private static class Info {

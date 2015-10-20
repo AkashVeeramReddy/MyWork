@@ -1,6 +1,6 @@
 package matrices;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * http://www.geeksforgeeks.org/given-n-x-n-square-matrix-find-sum-sub-squares-size-k-x-k/
@@ -32,7 +32,7 @@ public class SumOfSubSquares {
 	            {5, 5, 5, 5, 5},
 	         };
 		Integer[][] sumOfSubSquares = getSumOfSubSquares(arr, 3);
-		MyUtilities.printDoubleDimensionalArray(sumOfSubSquares,5);
+		ArrayUtilities.printDoubleDimensionalArray(sumOfSubSquares,5);
 	}
 	
 	public static Integer[][] getSumOfSubSquares(Integer[][] matrix, int k) {
@@ -48,7 +48,7 @@ public class SumOfSubSquares {
 						+ matrix[j][i]; 
 				}
 			}
-			MyUtilities.printSingleDimensionArray(sumInColumnForK);
+			ArrayUtilities.printSingleDimensionArray(sumInColumnForK);
 			int sum = 0;
 			for(int i=0;i<=(dim-k);i++) {
 				sum = 0;

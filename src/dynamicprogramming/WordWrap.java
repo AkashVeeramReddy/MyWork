@@ -1,6 +1,6 @@
 package dynamicprogramming;
 
-import utils.MyUtilities;
+import utils.ArrayUtilities;
 
 /**
  * Given a sequence of words, and a limit on the number of characters that can be put in
@@ -84,7 +84,7 @@ public class WordWrap {
 			}
 		}
 		System.out.println("======================Extras Array====================");
-		MyUtilities.printDoubleDimensionalArrayNeatly(extras, 20);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(extras, 20);
 		//Compute least cost array
 		Integer leastCost[][] = new Integer[length][length];
 		for(int i = 0; i < length;i++) {
@@ -101,7 +101,7 @@ public class WordWrap {
 			}
 		}
 		System.out.println("======================Least Cost Array====================");
-		MyUtilities.printDoubleDimensionalArrayNeatly(leastCost, 20);
+		ArrayUtilities.printDoubleDimensionalArrayNeatly(leastCost, 20);
 		//Compute Info array
 		Info [] infoArray = new Info[length];
 		for(int i = 0;i < length; i++) {

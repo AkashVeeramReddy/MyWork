@@ -1,5 +1,6 @@
 package arrays.search;
 
+import utils.ArrayUtilities;
 import utils.MyUtilities;
 
 public class ArraySearching {
@@ -71,7 +72,7 @@ public class ArraySearching {
 				negIdx++;
 				posIdx --;
 			} else if(!isNoAtNegIdxNeg && !isNoAtPosIdxPos) {
-				MyUtilities.swap(array, negIdx, posIdx);
+				ArrayUtilities.swapInArray(array, negIdx, posIdx);
 				negIdx++;
 				posIdx --;
 			} else {
@@ -104,7 +105,7 @@ public class ArraySearching {
 				return j;
 			}
 		}
-		MyUtilities.printSingleDimensionArray(array);
+		ArrayUtilities.printSingleDimensionArray(array);
 		return -1;
 	}
 	/**

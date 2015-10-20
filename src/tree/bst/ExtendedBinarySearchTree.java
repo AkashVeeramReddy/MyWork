@@ -14,9 +14,9 @@ import queue.IQueue;
 import tree.BinaryTree;
 import tree.ExtendedBinaryTree;
 import tree.IntegerBinaryTree;
+import tree.RotationType;
 import tree.TreeNode;
 import utils.MyUtilities;
-import utils.RotationType;
 
 /**
  * For a function, code in {@link BinarySearchTree}. Use some other class like
